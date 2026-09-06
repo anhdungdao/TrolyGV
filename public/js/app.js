@@ -124,12 +124,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadSettings();
   updateHeaderInfo();
 
-  // 3. Initialize Submodules
-  initChat();
-  initTimetable();
-  initDriveSearch();
-  initArchive();
-  initSettings();
+  // 3. Initialize Submodules an toàn với try-catch độc lập
+  try { initChat(); } catch (e) { console.error("Init Chat Error:", e); }
+  try { initTimetable(); } catch (e) { console.error("Init Timetable Error:", e); }
+  try { initDriveSearch(); } catch (e) { console.error("Init DriveSearch Error:", e); }
+  try { initArchive(); } catch (e) { console.error("Init Archive Error:", e); }
+  try { initSettings(); } catch (e) { console.error("Init Settings Error:", e); }
 
   console.log("🚀 Trợ lý Giáo viên AI đã sẵn sàng!");
 });

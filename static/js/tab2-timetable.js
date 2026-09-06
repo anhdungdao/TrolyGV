@@ -45,14 +45,18 @@ export function initTimetable() {
   const aiAnalyzeDocBtn = document.getElementById('btn-ai-analyze-doc');
 
   // Back to full week grid
-  backBtn.addEventListener('click', () => {
-    showFullGridView();
-  });
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      showFullGridView();
+    });
+  }
 
   // Save lesson details
-  saveLessonBtn.addEventListener('click', async () => {
-    await saveCurrentLessonDetail();
-  });
+  if (saveLessonBtn) {
+    saveLessonBtn.addEventListener('click', async () => {
+      await saveCurrentLessonDetail();
+    });
+  }
 
   // AI Analyze Document Button
   if (aiAnalyzeDocBtn) {
@@ -62,33 +66,39 @@ export function initTimetable() {
   }
 
   // Save entire timetable
-  saveAllBtn.addEventListener('click', async () => {
-    if (!AppState.currentTimetable) return;
-    try {
-      const resp = await fetch('/api/timetable/save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(AppState.currentTimetable)
-      });
-      if (resp.ok) {
-        showToast('Đã lưu toàn bộ thời khoá biểu thành công', 'success');
+  if (saveAllBtn) {
+    saveAllBtn.addEventListener('click', async () => {
+      if (!AppState.currentTimetable) return;
+      try {
+        const resp = await fetch('/api/timetable/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(AppState.currentTimetable)
+        });
+        if (resp.ok) {
+          showToast('Đã lưu toàn bộ thời khoá biểu thành công', 'success');
+        }
+      } catch (e) {
+        showToast('Lỗi khi lưu thời khoá biểu', 'error');
       }
-    } catch (e) {
-      showToast('Lỗi khi lưu thời khoá biểu', 'error');
-    }
-  });
+    });
+  }
 
   // Switch academic year
-  yearSelect.addEventListener('change', async (e) => {
-    AppState.settings.current_year = e.target.value;
-    await refreshWeeksList();
-  });
+  if (yearSelect) {
+    yearSelect.addEventListener('change', async (e) => {
+      AppState.settings.current_year = e.target.value;
+      await refreshWeeksList();
+    });
+  }
 
   // Switch semester
-  semSelect.addEventListener('change', async (e) => {
-    AppState.settings.current_semester = e.target.value;
-    await refreshWeeksList();
-  });
+  if (semSelect) {
+    semSelect.addEventListener('change', async (e) => {
+      AppState.settings.current_semester = e.target.value;
+      await refreshWeeksList();
+    });
+  }
 
   // Switch week
   if (weekSelect) {

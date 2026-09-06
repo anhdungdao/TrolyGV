@@ -12,24 +12,32 @@ export function initArchive() {
   const closeFooterBtn = document.getElementById('btn-close-archive-footer');
   const modal = document.getElementById('archive-modal');
 
-  openBtn.addEventListener('click', () => {
-    modal.classList.remove('hidden');
-    loadArchiveList();
-  });
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      if (modal) modal.classList.remove('hidden');
+      loadArchiveList();
+    });
+  }
 
-  closeBtn.addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      if (modal) modal.classList.add('hidden');
+    });
+  }
 
-  closeFooterBtn.addEventListener('click', () => {
-    modal.classList.add('hidden');
-  });
+  if (closeFooterBtn) {
+    closeFooterBtn.addEventListener('click', () => {
+      if (modal) modal.classList.add('hidden');
+    });
+  }
 
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.add('hidden');
-    }
-  });
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  }
 }
 
 /**
