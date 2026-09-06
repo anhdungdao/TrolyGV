@@ -45,8 +45,10 @@ app.include_router(chat.router, prefix="")
 app.include_router(timetable.router, prefix="")
 app.include_router(drive.router, prefix="")
 
-# Mount static files
+# Mount static files (Hỗ trợ cả /static, /css và /js để Local hiển thị đẹp 100% không bị 404)
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+app.mount("/css", StaticFiles(directory=str(STATIC_DIR / "css")), name="css")
+app.mount("/js", StaticFiles(directory=str(STATIC_DIR / "js")), name="js")
 
 @app.get("/")
 async def serve_index():
