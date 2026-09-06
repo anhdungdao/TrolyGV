@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "msg_328d7f57",
+    "sender": "user",
+    "text": "xin chào?",
+    "timestamp": "02:24 - 07/09/2026",
+    "file": null
+  },
+  {
+    "id": "msg_ae166227",
+    "sender": "assistant",
+    "text": "Chào Thầy/Cô ạ! Em là trợ lý AI chuyên hỗ trợ giáo viên. Em đã sẵn sàng hỗ trợ Thầy/Cô quản lý thời khoá biểu, sắp xếp lịch dạy hoặc giải đáp các thắc mắc chuyên môn. Thầy/Cô có thể gửi file thời khoá biểu hoặc đặt câu hỏi để em bắt đầu hỗ trợ ngay nhé!",
+    "timestamp": "02:24 - 07/09/2026",
+    "status": "NORMAL",
+    "pending_timetable": null
+  }
+]

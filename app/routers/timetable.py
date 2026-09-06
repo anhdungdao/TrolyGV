@@ -6,7 +6,7 @@ from app.services.storage_service import StorageService
 from app.services.gemini_service import GeminiService
 from app.config import UPLOAD_DIR
 
-router = APIRouter(prefix="/api/timetable", tags=["Timetable"])
+router = APIRouter(prefix="/timetable", tags=["Timetable"])
 
 @router.get("/current")
 def get_current_timetable(week: Optional[int] = Query(None)):

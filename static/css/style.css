@@ -1987,64 +1987,89 @@ td.is-past-cell {
   /* Header Navigation Co giãn gọn gàng */
   .app-header {
     height: auto;
-    min-height: 56px;
-    padding: 8px 12px;
-    flex-wrap: wrap;
-    gap: 8px;
+    min-height: 52px;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
   }
 
   .header-left {
-    width: 100%;
-    justify-content: space-between;
-    gap: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
   }
 
   .brand-logo {
-    gap: 8px;
+    gap: 6px;
+    flex-shrink: 0;
   }
 
   .logo-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
     border-radius: var(--radius-sm);
   }
 
-  .brand-title {
-    font-size: 0.95rem;
-    white-space: nowrap;
-  }
-
-  .brand-subtitle {
-    font-size: 0.7rem;
-    max-width: 130px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .brand-text {
+    display: none; /* Ẩn text dài để nhường chỗ cho Tab & Nút Cài đặt trên màn hình điện thoại */
   }
 
   /* Tab Navigation bar - Gọn gàng thanh lịch trên mobile */
   .tab-nav {
     display: flex;
-    flex: 1;
-    justify-content: flex-end;
     padding: 2px;
     border-radius: 12px;
+    gap: 2px;
   }
 
   .tab-btn {
-    padding: 6px 10px;
-    font-size: 0.78rem;
-    gap: 5px;
-    border-radius: 10px;
+    padding: 5px 8px;
+    font-size: 0.74rem;
+    gap: 4px;
+    border-radius: 8px;
   }
 
   .tab-btn .tab-icon {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
   }
 
+  /* Header Right - Nút Cài đặt ⚙️ luôn hiển thị nổi bật trên mobile */
   .header-right {
-    display: none; /* Ẩn bớt badge trên mobile để tiết kiệm không gian */
+    display: flex !important;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .header-right .term-badge {
+    display: none; /* Ẩn badge chữ dài trên mobile */
+  }
+
+  .header-right .icon-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    font-size: 1rem;
+    border-radius: var(--radius-full);
+    background: #f1f5f9;
+    border: 1.5px solid #cbd5e1;
+    color: var(--primary);
+    cursor: pointer;
+  }
+
+  .header-right .icon-btn .btn-text {
+    display: none; /* Ẩn chữ 'Cài đặt' trên mobile, chỉ hiện icon ⚙️ gọn đẹp */
+  }
+
+  .header-right .icon-btn:active {
+    background: var(--primary-light);
+    transform: scale(0.95);
   }
 
   /* Tab 1: AI Chat Mobile */

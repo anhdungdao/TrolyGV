@@ -10,7 +10,7 @@ from app.config import UPLOAD_DIR
 from app.services.storage_service import StorageService
 from app.services.gemini_service import GeminiService
 
-router = APIRouter(prefix="/api/chat", tags=["Chat AI"])
+router = APIRouter(prefix="/chat", tags=["Chat AI"])
 
 @router.get("/history")
 def get_chat_history():

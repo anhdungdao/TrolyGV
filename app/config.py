@@ -1,4 +1,5 @@
 import os
+import shutil
 from pathlib import Path
 
 # Base directories
@@ -7,6 +8,19 @@ IS_VERCEL = os.environ.get("VERCEL") == "1" or os.environ.get("AWS_LAMBDA_FUNCTI
 
 if IS_VERCEL:
     DATA_DIR = Path("/tmp/data")
+    ORIGINAL_DATA_DIR = BASE_DIR / "data"
+    try:
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        if ORIGINAL_DATA_DIR.exists():
+            for item in ORIGINAL_DATA_DIR.iterdir():
+                target = DATA_DIR / item.name
+                if not target.exists():
+                    if item.is_dir():
+                        shutil.copytree(item, target, dirs_exist_ok=True)
+                    else:
+                        shutil.copy2(item, target)
+    except Exception as e:
+        print(f"[Vercel Init Notice]: {e}")
 else:
     DATA_DIR = BASE_DIR / "data"
 

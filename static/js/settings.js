@@ -15,11 +15,22 @@ export function initSettings() {
   const toggleEyeBtn = document.getElementById('btn-toggle-gemini-key');
   const keyInput = document.getElementById('setting-gemini-key');
 
-  // Open modal
-  openBtn.addEventListener('click', () => {
-    populateFormFields();
-    modal.classList.remove('hidden');
-  });
+  // Open modal from header button
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      populateFormFields();
+      modal.classList.remove('hidden');
+    });
+  }
+
+  // Open modal from welcome guide card
+  const welcomeOpenBtn = document.getElementById('welcome-btn-open-settings');
+  if (welcomeOpenBtn) {
+    welcomeOpenBtn.addEventListener('click', () => {
+      populateFormFields();
+      modal.classList.remove('hidden');
+    });
+  }
 
   // Close modal
   closeBtn.addEventListener('click', () => {

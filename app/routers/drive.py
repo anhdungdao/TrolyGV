@@ -11,7 +11,7 @@ from app.services.drive_service import DriveService
 from app.services.storage_service import StorageService
 from app.config import UPLOAD_DIR
 
-router = APIRouter(prefix="/api/drive", tags=["Google Drive"])
+router = APIRouter(prefix="/drive", tags=["Google Drive"])
 
 @router.get("/search")
 def search_drive_files(

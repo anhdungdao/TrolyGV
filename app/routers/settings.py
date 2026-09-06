@@ -5,7 +5,7 @@ from app.models.schemas import SettingsModel
 
 from datetime import datetime
 
-router = APIRouter(prefix="/api/settings", tags=["Settings"])
+router = APIRouter(prefix="/settings", tags=["Settings"])
 
 @router.get("")
 def get_settings():
