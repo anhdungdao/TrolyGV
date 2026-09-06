@@ -1,0 +1,12 @@
+web quản lý thời khoá biểu giáo viên:
+
+1. tab chat AI:
+    - Tab này có 1 ô chat, giao diện chat, lưu lại lịch sử chat.
+    - đây là 1 tab chat với model Gemini thông qua api key của người dùng, trong phần setting có 1 ô nhập api key, tôi muốn lưu lại cho người dùng
+    - nhưng đặc biệt có 1 chức năng tạo thời khoá biểu cho 1 cá nhân. người dùng sẽ gửi kèm 1 file gì đó ( ảnh, excel, powerpoint,....) trong đấy có lịch của nhiều người khác. Hãy đặt một vài câu hỏi để người dùng cung cấp thêm thông tin cần thiết, sau đó gửi lại cho AI để AI tạo 1 lịch chi tiết cho website đó ở Tab2
+2. tab 2 thời khoá biểu:
+    - Thời khoá biểu sẽ chi tiết cho giáo viên theo dạng bảng, cột ngang là thứ ngày tháng, cột dọc là các tiết học trong ngày ( sáng 5 tiết chiều 5 tiết), có thông tin về lớp học, nội dung học.
+    - khi click vào bất kì 1 tiết nào, lập tức lịch này sẽ thu gọn sang góc trái thành lịch ngày ( chỉ gi mỗi tiết nào và lớp), còn phần lớn màn hình còn lại là nội dung của tiết học đó
+    - Nội dung tiết học sẽ được lưu ở google drive, sau đó setup Google drive API trong cài đặt của người dùng, có rất nhiều nội dung liên quan ( ppt, docs, excel... ), người dùng có thể click vào file để xem và sửa nội dung ( tất nhiên là bằng link của google chứ không cần web này phải handel cả việc sửa tài liệu).
+    - Người dùng có thể upload, remove tài liệu trực tiếp từ web
+3. Yêu cầu quy hoạch code theo các tầng riêng biệt cho tab1 và tab 2, chuẩn bị để phát triển thêm các phase sau.

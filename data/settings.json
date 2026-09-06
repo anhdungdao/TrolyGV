@@ -1,0 +1,12 @@
+{
+  "gemini_api_key": "AIzaSyDYIMFDPc2zAI7auXg2-M3MvZ9HNVLT1bc",
+  "gemini_model": "gemini-3.1-flash-lite",
+  "teacher_name": "Giáo viên",
+  "subject": "Toàn trường",
+  "current_year": "2025-2026",
+  "current_semester": "HK1",
+  "google_drive_enabled": false,
+  "google_drive_client_id": "956920063906-uattktvo1piqkflq72iadosd3l18f437.apps.googleusercontent.com",
+  "google_drive_api_key": "AIzaSyC3TS5tF_Dzjn2VPoG7rEyJZQZ15qTCZhQ",
+  "google_drive_folder_id": ""
+}
