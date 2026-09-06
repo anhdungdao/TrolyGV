@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -35,5 +36,14 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 async def serve_index():
     index_path = STATIC_DIR / "index.html"
     if index_path.exists():
-        return FileResponse(index_path)
-    return {"message": "Hệ thống đang khởi động, vui lòng tạo giao diện frontend"}
+        return FileResponse(str(index_path))
+    # Fallback search if current working directory shifted on Vercel
+    alt_paths = [
+        Path("static/index.html"),
+        Path("/var/task/static/index.html"),
+        Path(__file__).resolve().parent.parent / "static" / "index.html"
+    ]
+    for alt in alt_paths:
+        if alt.exists():
+            return FileResponse(str(alt))
+    return {"message": "Hệ thống đang khởi động, vui lòng kiểm tra thư mục static"}
