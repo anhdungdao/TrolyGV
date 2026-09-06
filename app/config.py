@@ -3,15 +3,24 @@ from pathlib import Path
 
 # Base directories
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
+IS_VERCEL = os.environ.get("VERCEL") == "1" or os.environ.get("AWS_LAMBDA_FUNCTION_NAME") is not None
+
+if IS_VERCEL:
+    DATA_DIR = Path("/tmp/data")
+else:
+    DATA_DIR = BASE_DIR / "data"
+
 TIMETABLES_DIR = DATA_DIR / "timetables"
 SETTINGS_FILE = DATA_DIR / "settings.json"
 UPLOAD_DIR = DATA_DIR / "temp_uploads"
 STATIC_DIR = BASE_DIR / "static"
 
-# Ensure essential directories exist
-for directory in [DATA_DIR, TIMETABLES_DIR, UPLOAD_DIR, STATIC_DIR]:
-    directory.mkdir(parents=True, exist_ok=True)
+# Ensure essential directories exist safely
+for directory in [DATA_DIR, TIMETABLES_DIR, UPLOAD_DIR]:
+    try:
+        directory.mkdir(parents=True, exist_ok=True)
+    except Exception:
+        pass
 
 # Default system settings
 DEFAULT_SETTINGS = {
