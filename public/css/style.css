@@ -1972,4 +1972,327 @@ td.is-past-cell {
   opacity: 0.95;
 }
 
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE DESIGN (KIỂU DÁNG HOÀN CHỈNH CHO ĐIỆN THOẠI)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Cho phép trang cuộn tự nhiên trên điện thoại nếu cần */
+  body {
+    height: 100vh;
+    height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  /* Header Navigation Co giãn gọn gàng */
+  .app-header {
+    height: auto;
+    min-height: 56px;
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .header-left {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .brand-logo {
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 20px;
+    border-radius: var(--radius-sm);
+  }
+
+  .brand-title {
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .brand-subtitle {
+    font-size: 0.7rem;
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Tab Navigation bar - Gọn gàng thanh lịch trên mobile */
+  .tab-nav {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    padding: 2px;
+    border-radius: 12px;
+  }
+
+  .tab-btn {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    gap: 5px;
+    border-radius: 10px;
+  }
+
+  .tab-btn .tab-icon {
+    font-size: 0.9rem;
+  }
+
+  .header-right {
+    display: none; /* Ẩn bớt badge trên mobile để tiết kiệm không gian */
+  }
+
+  /* Tab 1: AI Chat Mobile */
+  .chat-wrapper {
+    padding: 10px 10px 8px 10px;
+    gap: 8px;
+  }
+
+  .chat-messages {
+    padding: 8px 4px;
+    gap: 12px;
+  }
+
+  .message-card {
+    max-width: 95%;
+    gap: 8px;
+  }
+
+  .message-card .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .msg-body {
+    padding: 10px 12px;
+  }
+
+  .msg-content {
+    font-size: 0.85rem;
+  }
+
+  .welcome-guide {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .guide-item {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .guide-item p {
+    font-size: 0.75rem;
+  }
+
+  .chat-input-container {
+    padding: 8px 10px;
+    border-radius: var(--radius-lg);
+  }
+
+  .chat-input-form textarea {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  .btn-attach, .btn-send {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+
+  .input-hint {
+    display: none;
+  }
+
+  /* Tab 2: Timetable Mobile Layout */
+  .timetable-container {
+    padding: 8px 8px;
+    gap: 8px;
+  }
+
+  .timetable-toolbar {
+    padding: 8px 10px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .toolbar-left {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .pill-group {
+    padding: 2px 6px;
+    border-radius: 16px;
+    gap: 4px;
+  }
+
+  .pill-label {
+    font-size: 0.72rem;
+    padding-left: 2px;
+  }
+
+  .toolbar-select {
+    font-size: 0.75rem;
+    padding: 2px 4px;
+  }
+
+  .btn-tool-icon, .btn-week-step {
+    width: 22px;
+    height: 22px;
+    font-size: 0.65rem;
+  }
+
+  .btn-tool-text {
+    padding: 3px 8px;
+    font-size: 0.72rem;
+  }
+
+  .btn-reuse-pill {
+    padding: 4px 10px;
+    font-size: 0.72rem;
+  }
+
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2px;
+    padding-top: 6px;
+    border-top: 1px dashed var(--border-color);
+  }
+
+  .stat-badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+  }
+
+  .btn-primary.btn-save-all {
+    padding: 6px 12px;
+    font-size: 0.78rem;
+  }
+
+  /* Timetable Grid Table Cuộn Ngang Mượt mà trên Mobile */
+  .grid-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--radius-md);
+  }
+
+  .timetable-grid {
+    min-width: 680px; /* Vừa vặn để vuốt ngang xem từng ngày */
+  }
+
+  .timetable-grid th {
+    padding: 8px 4px;
+    font-size: 0.75rem;
+  }
+
+  .timetable-grid th.col-period {
+    width: 80px;
+  }
+
+  .th-day-name {
+    font-size: 0.75rem;
+  }
+
+  .th-day-date {
+    font-size: 0.68rem;
+    padding: 1px 6px;
+  }
+
+  .timetable-grid td {
+    height: 60px;
+    padding: 4px;
+  }
+
+  .slot-card {
+    padding: 6px;
+  }
+
+  .class-badge {
+    font-size: 0.68rem;
+    padding: 1px 5px;
+  }
+
+  .slot-lesson-title {
+    font-size: 0.72rem;
+    margin: 2px 0;
+  }
+
+  /* Split detail view trên Mobile (Chuyển thành dạng xếp dọc/thẻ) */
+  .split-detail-view {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .compact-day-sidebar {
+    width: 100%;
+    max-height: 160px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .sidebar-header {
+    padding: 8px 12px;
+  }
+
+  .compact-period-list {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 6px 10px;
+    gap: 8px;
+  }
+
+  .compact-period-item {
+    min-width: 130px;
+    padding: 6px 10px;
+    flex-shrink: 0;
+  }
+
+  .panel-header {
+    padding: 12px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .panel-header .panel-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .panel-content-grid {
+    padding: 14px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Modals trên Mobile */
+  .modal-dialog {
+    max-width: 94vw;
+    margin: 10px auto;
+  }
+
+  .modal-body {
+    padding: 16px;
+  }
+}
+
 
