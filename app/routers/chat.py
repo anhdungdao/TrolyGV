@@ -8,7 +8,6 @@ from fastapi import APIRouter, UploadFile, File, Form, HTTPException
 
 from app.config import UPLOAD_DIR
 from app.services.storage_service import StorageService
-from app.services.gemini_service import GeminiService
 
 router = APIRouter(prefix="/chat", tags=["Chat AI"])
 
@@ -58,6 +57,7 @@ async def send_message(
     history.append(user_msg)
 
     # Gọi Gemini xử lý
+    from app.services.gemini_service import GeminiService
     ai_result = GeminiService.process_chat(
         user_message=message,
         chat_history=history,

@@ -1,0 +1,297 @@
+/**
+ * TIMETABLE GRID & PERIOD CARDS
+ * Bảng 10 tiết cả tuần, thẻ tiết học PeriodCard sang trọng
+ */
+
+.timetable-grid-wrapper {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.timetable-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+
+/* Table Header (Day Columns) */
+.timetable-table thead th {
+  background: var(--bg-subtle);
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  text-align: center;
+  user-select: none;
+}
+
+.timetable-table thead th:last-child {
+  border-right: none;
+}
+
+.day-header-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.day-header-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.day-header-date {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.day-header-cell.is-today .day-header-title {
+  color: var(--primary);
+}
+
+.day-header-cell.is-today .day-header-date {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+}
+
+/* Period Label Column (First column) */
+.timetable-table th.col-period-label,
+.timetable-table td.col-period-label {
+  width: 90px;
+  background: #fbfdfa;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.period-meta-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.period-num-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.period-time-text {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Grid Cells */
+.timetable-table td.grid-slot-cell {
+  padding: 5px;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: stretch;
+  height: 96px;
+  background: #ffffff;
+}
+
+.timetable-table td.grid-slot-cell:last-child {
+  border-right: none;
+}
+
+/* Lunch Break Row */
+.timetable-table tr.lunch-divider-row td {
+  background: #f6faf5;
+  border-top: 1px dashed var(--primary-border);
+  border-bottom: 1px dashed var(--primary-border);
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #1e4e2b;
+  letter-spacing: 0.04em;
+}
+
+/* ==================== PERIOD CARD COMPONENT ==================== */
+.period-card {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e1ece1;
+  box-shadow: var(--shadow-2xs);
+}
+
+.period-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: #86efac;
+}
+
+/* Card Header: Class badge & Room */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.class-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--primary);
+  background: var(--primary-surface);
+  border: 1px solid var(--primary-border);
+  padding: 2px 7px;
+  border-radius: var(--radius-sm);
+  letter-spacing: -0.01em;
+}
+
+.room-badge {
+  font-size: 0.68rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* Card Body: Lesson Title */
+.card-body {
+  margin: 4px 0;
+  flex: 1;
+}
+
+.lesson-title-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Card Footer: Badges & Files */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  margin-top: auto;
+}
+
+.attached-doc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.65rem;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+
+/* Empty Period Slot */
+.period-card.is-empty {
+  background: #fafcf9;
+  border: 1px dashed #e2efe0;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.period-card.is-empty:hover {
+  background: #f0f8ef;
+  border-color: #a7f3d0;
+  border-style: solid;
+}
+
+.empty-plus-icon {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  transition: all var(--trans-fast);
+}
+
+.period-card.is-empty:hover .empty-plus-icon {
+  color: var(--primary);
+  transform: scale(1.2);
+}
+
+/* Highlighted or Selected Period in Split View */
+.period-card.is-selected {
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 0 3px rgba(27, 74, 47, 0.15), var(--shadow-sm);
+  transform: scale(1.02);
+}
+
+/* ==================== PAST / CURRENT / FUTURE DAY STYLES ==================== */
+/* Header column in the past */
+.timetable-table th.col-day.is-past {
+  background: #f8faf9;
+  opacity: 0.7;
+}
+
+.timetable-table th.col-day.is-past .day-header-title {
+  color: #94a3b8;
+}
+
+.timetable-table th.col-day.is-past .day-header-date {
+  color: #cbd5e1;
+}
+
+/* Today column header */
+.timetable-table th.col-day.is-today {
+  background: #f0fdf4;
+  border-bottom: 2px solid var(--primary);
+}
+
+/* Cells in past days: dimmed, subtle grayish background */
+.timetable-table td.grid-slot-cell.is-past {
+  background: #fcfdfc;
+}
+
+.period-card.is-past {
+  opacity: 0.52;
+  filter: grayscale(0.45);
+  background: #f8faf8;
+  border-color: #e5ebe4;
+}
+
+.period-card.is-past:hover {
+  opacity: 0.95;
+  filter: none;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: #86efac;
+}
+
+/* Today Period Cards */
+.period-card.is-today {
+  border-color: #bbf7d0;
+  box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.25), var(--shadow-2xs);
+}
+
+.period-card.is-today:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(27, 74, 47, 0.2), var(--shadow-sm);
+}
+

@@ -114,11 +114,9 @@ class StorageService:
             (5, "10:30 - 11:15")
         ]
         time_slots_afternoon = [
-            (6, "13:00 - 13:45"),
-            (7, "13:50 - 14:35"),
-            (8, "14:45 - 15:30"),
-            (9, "15:40 - 16:25"),
-            (10, "16:30 - 17:15")
+            (6, "14:00 - 14:45"),
+            (7, "14:55 - 15:40"),
+            (8, "15:50 - 16:35")
         ]
 
         for day in range(2, 8):
@@ -186,7 +184,55 @@ class StorageService:
         path = StorageService._get_timetable_path(target_year, target_sem, target_week)
 
         if not path.exists():
-            # Nếu tuần 1 chưa có, thử copy từ template
+            # Thử tìm tuần gần nhất trong kỳ học để kế thừa khung phân công thời khoá biểu!
+            parent_dir = path.parent
+            base_template = None
+            if parent_dir.exists():
+                existing_weeks = sorted([
+                    int(f.stem.replace("week_", ""))
+                    for f in parent_dir.glob("week_*.json")
+                    if f.stem.replace("week_", "").isdigit()
+                ])
+                for prev_w in existing_weeks:
+                    prev_path = parent_dir / f"week_{prev_w}.json"
+                    try:
+                        with open(prev_path, "r", encoding="utf-8") as pf:
+                            prev_data = json.load(pf)
+                            base_tt = Timetable(**prev_data)
+                            new_schedule = []
+                            for slot in base_tt.schedule:
+                                # Chỉ giữ 8 tiết chuẩn (5 sáng + 3 chiều)
+                                if slot.period > 8:
+                                    continue
+                                new_slot = slot.copy(deep=True)
+                                new_slot.lesson_title = ""
+                                new_slot.lesson_objective = ""
+                                new_slot.notes = ""
+                                new_slot.drive_files = []
+                                new_slot.analyzed_file_ids = []
+                                new_schedule.append(new_slot)
+                            base_template = Timetable(
+                                metadata=TimetableMetadata(
+                                    teacher_name=base_tt.metadata.teacher_name,
+                                    academic_year=target_year,
+                                    semester=target_sem,
+                                    week=target_week,
+                                    applied_date=datetime.now().strftime("%Y-%m-%d"),
+                                    start_date=base_tt.metadata.start_date,
+                                    total_periods=base_tt.metadata.total_periods,
+                                    created_at=datetime.now().isoformat(),
+                                    updated_at=datetime.now().isoformat()
+                                ),
+                                schedule=new_schedule
+                            )
+                            break
+                    except Exception:
+                        pass
+
+            if base_template:
+                StorageService.save_timetable(base_template)
+                return base_template
+
             empty_tt = StorageService.create_empty_schedule(
                 teacher_name=settings.get("teacher_name", "Giáo viên"),
                 subject=settings.get("subject", "Toàn trường"),
@@ -200,6 +246,9 @@ class StorageService:
         try:
             with open(path, "r", encoding="utf-8") as f:
                 data = json.load(f)
+                # Lọc bỏ tiết 9, 10 cũ nếu có trong file
+                if "schedule" in data:
+                    data["schedule"] = [s for s in data["schedule"] if s.get("period", 0) <= 8]
                 tt = Timetable(**data)
                 tt.metadata.week = target_week
                 return tt
@@ -230,6 +279,82 @@ class StorageService:
                 pass
 
         return timetable
+
+    @staticmethod
+    def propagate_schedule_to_all_weeks(
+        source_timetable: Timetable,
+        total_weeks: int = 20
+    ) -> int:
+        """Lan truyền khung phân công thời khoá biểu (lớp, môn, phòng) sang tất cả các tuần của kỳ học.
+        Bảo toàn bài dạy và tài liệu nếu tuần đó đã có sẵn."""
+        year = source_timetable.metadata.academic_year
+        sem = source_timetable.metadata.semester
+        source_week = source_timetable.metadata.week or 1
+
+        # Map khung phân công từ source (chỉ lấy 8 tiết chuẩn)
+        assignment_map = {}
+        for slot in source_timetable.schedule:
+            if slot.period <= 8:
+                assignment_map[f"{slot.day_of_week}_{slot.period}"] = {
+                    "class_name": slot.class_name,
+                    "subject": slot.subject,
+                    "room": slot.room
+                }
+
+        count_updated = 0
+        for w in range(1, total_weeks + 1):
+            if w == source_week:
+                continue
+            path = StorageService._get_timetable_path(year, sem, w)
+            if path.exists():
+                try:
+                    with open(path, "r", encoding="utf-8") as f:
+                        w_data = json.load(f)
+                    w_tt = Timetable(**w_data)
+                    # Lọc bỏ tiết 9, 10 cũ nếu có
+                    w_tt.schedule = [s for s in w_tt.schedule if s.period <= 8]
+                    # Cập nhật khung phân công lớp mà không ghi đè bài dạy / tài liệu
+                    for slot in w_tt.schedule:
+                        key = f"{slot.day_of_week}_{slot.period}"
+                        if key in assignment_map:
+                            slot.class_name = assignment_map[key]["class_name"]
+                            slot.subject = assignment_map[key]["subject"]
+                            slot.room = assignment_map[key]["room"]
+                    StorageService.save_timetable(w_tt)
+                    count_updated += 1
+                except Exception:
+                    pass
+            else:
+                # Tạo mới tuần w kế thừa khung phân công
+                new_schedule = []
+                for slot in source_timetable.schedule:
+                    if slot.period > 8:
+                        continue
+                    new_slot = slot.copy(deep=True)
+                    new_slot.lesson_title = ""
+                    new_slot.lesson_objective = ""
+                    new_slot.notes = ""
+                    new_slot.drive_files = []
+                    new_slot.analyzed_file_ids = []
+                    new_schedule.append(new_slot)
+                new_tt = Timetable(
+                    metadata=TimetableMetadata(
+                        teacher_name=source_timetable.metadata.teacher_name,
+                        academic_year=year,
+                        semester=sem,
+                        week=w,
+                        applied_date=datetime.now().strftime("%Y-%m-%d"),
+                        start_date=source_timetable.metadata.start_date,
+                        total_periods=source_timetable.metadata.total_periods,
+                        created_at=datetime.now().isoformat(),
+                        updated_at=datetime.now().isoformat()
+                    ),
+                    schedule=new_schedule
+                )
+                StorageService.save_timetable(new_tt)
+                count_updated += 1
+
+        return count_updated
 
     @staticmethod
     def create_new_week(year: str, semester: str, copy_from_week: Optional[int] = None) -> Timetable:
@@ -418,6 +543,7 @@ class StorageService:
                 for key, val in updates.items():
                     if val is not None and hasattr(slot, key):
                         setattr(slot, key, val)
+                target_slot.updated_at = datetime.now().isoformat()
                 break
 
         if target_slot:
@@ -528,3 +654,64 @@ class StorageService:
     def save_chat_history(messages: List[Dict[str, Any]]) -> None:
         with open(CHAT_HISTORY_FILE, "w", encoding="utf-8") as f:
             json.dump(messages, f, ensure_ascii=False, indent=2)
+
+    @staticmethod
+    def backup_all_data() -> Dict[str, Any]:
+        """Gom toàn bộ Cài đặt và Thời khoá biểu các tuần/học kỳ để đồng bộ lên Google Drive"""
+        settings = StorageService.get_settings()
+        timetables_data: Dict[str, Dict[str, Dict[str, Any]]] = {}
+
+        if TIMETABLES_DIR.exists():
+            for year_dir in TIMETABLES_DIR.iterdir():
+                if year_dir.is_dir() and not year_dir.name.startswith("."):
+                    year = year_dir.name
+                    timetables_data[year] = {}
+                    for sem_dir in year_dir.iterdir():
+                        if sem_dir.is_dir():
+                            sem = sem_dir.name
+                            timetables_data[year][sem] = {}
+                            for file in sem_dir.glob("*.json"):
+                                try:
+                                    with open(file, "r", encoding="utf-8") as f:
+                                        timetables_data[year][sem][file.stem] = json.load(f)
+                                except Exception as e:
+                                    print(f"[Backup Error reading {file}]: {e}")
+
+        return {
+            "version": "2.0",
+            "exported_at": datetime.now().isoformat(),
+            "settings": settings,
+            "timetables": timetables_data
+        }
+
+    @staticmethod
+    def restore_all_data(payload: Dict[str, Any]) -> Dict[str, Any]:
+        """Khôi phục toàn bộ Cài đặt và Thời khoá biểu từ gói đồng bộ Google Drive"""
+        restored_files = 0
+        settings = payload.get("settings")
+        if settings and isinstance(settings, dict):
+            StorageService.save_settings(settings)
+
+        timetables_data = payload.get("timetables", {})
+        if isinstance(timetables_data, dict):
+            for year, sems in timetables_data.items():
+                if isinstance(sems, dict):
+                    for sem, files in sems.items():
+                        if isinstance(files, dict):
+                            sem_dir = TIMETABLES_DIR / year / sem
+                            sem_dir.mkdir(parents=True, exist_ok=True)
+                            for file_stem, file_content in files.items():
+                                target_path = sem_dir / f"{file_stem}.json"
+                                try:
+                                    with open(target_path, "w", encoding="utf-8") as f:
+                                        json.dump(file_content, f, ensure_ascii=False, indent=2)
+                                    restored_files += 1
+                                except Exception as e:
+                                    print(f"[Restore Error writing {target_path}]: {e}")
+
+        return {
+            "success": True,
+            "restored_files": restored_files,
+            "settings_restored": bool(settings)
+        }
+

@@ -28,6 +28,7 @@ class PeriodSlot(BaseModel):
     drive_folder_id: Optional[str] = Field(default=None, alias="driveFolderId")
     drive_files: List[DriveFile] = Field(default_factory=list, alias="driveFiles")
     analyzed_file_ids: List[str] = Field(default_factory=list, alias="analyzedFileIds")
+    updated_at: Optional[str] = Field(default=None, alias="updatedAt")
 
     class Config:
         populate_by_name = True

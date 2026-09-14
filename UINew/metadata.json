@@ -1,0 +1,6 @@
+{
+  "name": "EduPlan - Lịch Giảng Dạy & Thời Khóa Biểu Toán Học",
+  "description": "Ứng dụng thời khóa biểu và kế hoạch giảng dạy Chuyên Môn Toán cho giáo viên THPT, kèm AI Trợ giảng chuyên môn toán học.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

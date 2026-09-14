@@ -6,10 +6,10 @@
     "week": 1,
     "appliedDate": "2026-09-07",
     "startDate": "2026-09-07",
-    "totalPeriods": 0,
+    "totalPeriods": 4,
     "notes": "",
     "createdAt": "2026-09-07T01:10:09.107262",
-    "updatedAt": "2026-09-07T01:10:09.108261"
+    "updatedAt": "2026-09-15T03:42:53.219890"
   },
   "schedule": [
     {
@@ -18,15 +18,26 @@
       "session": "morning",
       "period": 1,
       "timeRange": "07:00 - 07:45",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
+      "className": "10A1_TEST",
+      "subject": "Ngữ văn",
+      "room": "P101",
+      "lessonTitle": "Tổng quan văn học",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "driveFiles": [
+        {
+          "id": "mock_drive_file_1",
+          "name": "Bai_1_Tong_quan_van_hoc_Viet_Nam.pptx",
+          "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+          "webViewLink": "https://docs.google.com/presentation/d/demo1/edit",
+          "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_11_collection_list.png",
+          "size": null,
+          "modifiedTime": "2026-09-02T10:30:00Z"
+        }
+      ],
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p2",
@@ -42,7 +53,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p3",
@@ -50,15 +62,26 @@
       "session": "morning",
       "period": 3,
       "timeRange": "08:45 - 09:30",
-      "className": "",
+      "className": "10A8",
       "subject": "",
       "room": "",
-      "lessonTitle": "",
+      "lessonTitle": "Bài 1: Truyện về các vị thần sáng tạo thế giới",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "driveFiles": [
+        {
+          "id": "1dkVOiYrjd-VV2LO6EWUA8t6gDjnzNJ33",
+          "name": "giaoan_colinh_backup_data.json",
+          "mimeType": "application/json",
+          "webViewLink": "https://drive.google.com/file/d/1dkVOiYrjd-VV2LO6EWUA8t6gDjnzNJ33/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/json",
+          "size": "214597",
+          "modifiedTime": "2026-09-14T18:25:54.375Z"
+        }
+      ],
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p4",
@@ -74,7 +97,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p5",
@@ -82,15 +106,28 @@
       "session": "morning",
       "period": 5,
       "timeRange": "10:30 - 11:15",
-      "className": "",
+      "className": "10A12",
       "subject": "",
       "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
+      "lessonTitle": "Tổng quan văn học",
+      "lessonObjective": "Giúp học sinh nắm được khái niệm, đặc trưng, chức năng của văn học và các giai đoạn phát triển cơ bản của văn học Việt Nam.",
       "notes": "",
       "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "driveFiles": [
+        {
+          "id": "1dkVOiYrjd-VV2LO6EWUA8t6gDjnzNJ33",
+          "name": "giaoan_colinh_backup_data.json",
+          "mimeType": "application/json",
+          "webViewLink": "https://drive.google.com/file/d/1dkVOiYrjd-VV2LO6EWUA8t6gDjnzNJ33/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/json",
+          "size": "283243",
+          "modifiedTime": "2026-09-14T20:11:29.376Z"
+        }
+      ],
+      "analyzedFileIds": [
+        "1dkVOiYrjd-VV2LO6EWUA8t6gDjnzNJ33"
+      ],
+      "updatedAt": "2026-09-15T03:12:43.770885"
     },
     {
       "id": "d2_p6",
@@ -98,15 +135,16 @@
       "session": "afternoon",
       "period": 6,
       "timeRange": "13:00 - 13:45",
-      "className": "",
-      "subject": "",
-      "room": "",
+      "className": "10A2_TEST",
+      "subject": "Ngữ văn",
+      "room": "P102",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p7",
@@ -122,7 +160,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p8",
@@ -138,39 +177,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d2_p9",
-      "dayOfWeek": 2,
-      "session": "afternoon",
-      "period": 9,
-      "timeRange": "15:40 - 16:25",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d2_p10",
-      "dayOfWeek": 2,
-      "session": "afternoon",
-      "period": 10,
-      "timeRange": "16:30 - 17:15",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p1",
@@ -186,7 +194,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p2",
@@ -202,7 +211,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p3",
@@ -218,7 +228,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p4",
@@ -234,7 +245,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p5",
@@ -250,7 +262,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p6",
@@ -266,7 +279,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p7",
@@ -282,7 +296,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p8",
@@ -298,39 +313,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d3_p9",
-      "dayOfWeek": 3,
-      "session": "afternoon",
-      "period": 9,
-      "timeRange": "15:40 - 16:25",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d3_p10",
-      "dayOfWeek": 3,
-      "session": "afternoon",
-      "period": 10,
-      "timeRange": "16:30 - 17:15",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p1",
@@ -346,7 +330,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p2",
@@ -362,7 +347,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p3",
@@ -377,8 +363,19 @@
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "driveFiles": [
+        {
+          "id": "1dkVOiYrjd-VV2LO6EWUA8t6gDjnzNJ33",
+          "name": "giaoan_colinh_backup_data.json",
+          "mimeType": "application/json",
+          "webViewLink": "https://drive.google.com/file/d/1dkVOiYrjd-VV2LO6EWUA8t6gDjnzNJ33/view?usp=drivesdk",
+          "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/json",
+          "size": "213509",
+          "modifiedTime": "2026-09-14T18:23:14.609Z"
+        }
+      ],
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p4",
@@ -394,7 +391,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p5",
@@ -410,7 +408,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p6",
@@ -426,7 +425,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p7",
@@ -442,7 +442,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p8",
@@ -458,39 +459,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d4_p9",
-      "dayOfWeek": 4,
-      "session": "afternoon",
-      "period": 9,
-      "timeRange": "15:40 - 16:25",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d4_p10",
-      "dayOfWeek": 4,
-      "session": "afternoon",
-      "period": 10,
-      "timeRange": "16:30 - 17:15",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p1",
@@ -506,7 +476,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p2",
@@ -522,7 +493,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p3",
@@ -538,7 +510,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p4",
@@ -554,7 +527,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p5",
@@ -570,7 +544,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p6",
@@ -586,7 +561,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p7",
@@ -602,7 +578,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p8",
@@ -618,39 +595,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d5_p9",
-      "dayOfWeek": 5,
-      "session": "afternoon",
-      "period": 9,
-      "timeRange": "15:40 - 16:25",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d5_p10",
-      "dayOfWeek": 5,
-      "session": "afternoon",
-      "period": 10,
-      "timeRange": "16:30 - 17:15",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p1",
@@ -666,7 +612,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p2",
@@ -682,7 +629,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p3",
@@ -698,7 +646,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p4",
@@ -714,7 +663,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p5",
@@ -730,7 +680,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p6",
@@ -746,7 +697,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p7",
@@ -762,7 +714,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p8",
@@ -778,39 +731,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d6_p9",
-      "dayOfWeek": 6,
-      "session": "afternoon",
-      "period": 9,
-      "timeRange": "15:40 - 16:25",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d6_p10",
-      "dayOfWeek": 6,
-      "session": "afternoon",
-      "period": 10,
-      "timeRange": "16:30 - 17:15",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p1",
@@ -826,7 +748,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p2",
@@ -842,7 +765,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p3",
@@ -858,7 +782,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p4",
@@ -874,7 +799,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p5",
@@ -890,7 +816,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p6",
@@ -906,7 +833,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p7",
@@ -922,7 +850,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p8",
@@ -938,39 +867,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d7_p9",
-      "dayOfWeek": 7,
-      "session": "afternoon",
-      "period": 9,
-      "timeRange": "15:40 - 16:25",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
-    },
-    {
-      "id": "d7_p10",
-      "dayOfWeek": 7,
-      "session": "afternoon",
-      "period": 10,
-      "timeRange": "16:30 - 17:15",
-      "className": "",
-      "subject": "",
-      "room": "",
-      "lessonTitle": "",
-      "lessonObjective": "",
-      "notes": "",
-      "driveFolderId": null,
-      "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     }
   ]
 }

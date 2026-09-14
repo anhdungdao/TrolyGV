@@ -3,7 +3,6 @@ from typing import Optional, Dict, Any
 
 from app.models.schemas import Timetable, UpdateLessonRequest, PeriodSlot
 from app.services.storage_service import StorageService
-from app.services.gemini_service import GeminiService
 from app.config import UPLOAD_DIR
 
 router = APIRouter(prefix="/timetable", tags=["Timetable"])
@@ -60,12 +59,19 @@ def get_terms(year: Optional[str] = Query(None)):
     }
 
 @router.post("/save")
-def save_timetable(timetable: Timetable):
+def save_timetable(
+    timetable: Timetable,
+    propagate_to_semester: bool = Query(False)
+):
     try:
         saved = StorageService.save_timetable(timetable)
+        propagated_count = 0
+        if propagate_to_semester:
+            propagated_count = StorageService.propagate_schedule_to_all_weeks(saved, total_weeks=20)
         return {
             "message": f"Đã lưu thành công thời khoá biểu năm học {saved.metadata.academic_year} ({saved.metadata.semester}) - Tuần {saved.metadata.week}",
-            "timetable": saved
+            "timetable": saved,
+            "propagated_weeks": propagated_count
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -222,6 +228,7 @@ def analyze_lesson_with_ai(
     subject = target_slot.subject or settings.get("subject", "Ngữ văn")
 
     # 1. Kiểm tra nếu file đã có sẵn trong local uploads
+    from app.services.gemini_service import GeminiService
     matches = list(UPLOAD_DIR.glob(f"{latest_file.id}.*"))
     ai_result = None
 
@@ -278,3 +285,18 @@ def analyze_lesson_with_ai(
         "slot": target_slot,
         "ai_result": ai_result
     }
+
+@router.get("/export-all")
+def export_all_timetables():
+    """Xuất toàn bộ cài đặt và thời khoá biểu tất cả các tuần/học kỳ để đồng bộ lên Google Drive"""
+    return StorageService.backup_all_data()
+
+@router.post("/import-all")
+def import_all_timetables(payload: Dict[str, Any]):
+    """Nhập và khôi phục toàn bộ cài đặt và thời khoá biểu từ bản sao lưu Google Drive"""
+    res = StorageService.restore_all_data(payload)
+    return {
+        "message": f"Đã khôi phục thành công {res.get('restored_files', 0)} tệp thời khoá biểu!",
+        "result": res
+    }
+

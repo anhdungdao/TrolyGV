@@ -5,6 +5,7 @@
 
 import { AppState, showToast, switchTab } from './app.js';
 import { loadTimetableData } from './tab2-timetable.js';
+import { triggerAutoSync } from './drive-sync.js';
 
 let selectedFile = null;
 
@@ -252,6 +253,14 @@ function attachConfirmationEvents(cardElement, timetableData) {
       confirmBtn.disabled = true;
       confirmBtn.innerHTML = '<span>⏳ Đang lưu vào thời khoá biểu...</span>';
 
+      const targetWeek = AppState.currentWeek || 1;
+      timetableData.metadata.week = targetWeek;
+
+      const y = timetableData.metadata.academicYear || AppState.settings.current_year;
+      const s = timetableData.metadata.semester || AppState.settings.current_semester;
+      const storageKey = `troly_gv_tt_${y}_${s}_week_${targetWeek}`;
+      localStorage.setItem(storageKey, JSON.stringify(timetableData));
+
       try {
         const resp = await fetch('/api/timetable/save', {
           method: 'POST',
@@ -260,23 +269,32 @@ function attachConfirmationEvents(cardElement, timetableData) {
         });
 
         if (resp.ok) {
-          showToast('✅ Đã cập nhật thành công thời khoá biểu!', 'success');
+          showToast(`✅ Đã áp dụng thời khoá biểu vào Tuần ${targetWeek}!`, 'success');
           confirmBtn.innerHTML = '<span>✔ Đã áp dụng thành công</span>';
           confirmBtn.style.background = '#059669';
 
+          triggerAutoSync();
+
           // Tự động tải lại TKB và chuyển sang Tab 2
-          loadTimetableData(timetableData.metadata.academicYear, timetableData.metadata.semester);
+          loadTimetableData(y, s, targetWeek);
           setTimeout(() => {
             switchTab('tab-timetable');
           }, 600);
         } else {
-          showToast('Lỗi khi lưu thời khoá biểu', 'error');
-          confirmBtn.disabled = false;
-          confirmBtn.innerHTML = '<span>✔ Thử lại</span>';
+          showToast('Đã lưu thời khoá biểu trên trình duyệt', 'info');
+          triggerAutoSync();
+          loadTimetableData(y, s, targetWeek);
+          setTimeout(() => {
+            switchTab('tab-timetable');
+          }, 600);
         }
       } catch (err) {
-        showToast('Lỗi mạng kết nối máy chủ', 'error');
-        confirmBtn.disabled = false;
+        showToast('Đã lưu thời khoá biểu cục bộ (offline)', 'info');
+        triggerAutoSync();
+        loadTimetableData(y, s, targetWeek);
+        setTimeout(() => {
+          switchTab('tab-timetable');
+        }, 600);
       }
     });
   }

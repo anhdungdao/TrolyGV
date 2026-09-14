@@ -1,0 +1,322 @@
+/**
+ * LAYOUT - Header, FilterBar, Main App Containers
+ */
+
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== TOP APP HEADER ==================== */
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: var(--shadow-2xs);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-2xs);
+  flex-shrink: 0;
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.brand-subject-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--primary-surface);
+  color: var(--primary);
+  border: 1px solid var(--primary-border);
+}
+
+.brand-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Header Center: Academic Term Pill */
+.header-center {
+  display: flex;
+  align-items: center;
+}
+
+.header-term-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-surface);
+  border: 1px solid var(--primary-border);
+  color: var(--primary);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-2xs);
+}
+
+/* Header Right: Actions */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: var(--text-body);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  box-shadow: var(--shadow-2xs);
+}
+
+.btn-header:hover {
+  background: var(--bg-hover);
+  border-color: #cbd5e1;
+}
+
+.btn-header.sync-active {
+  background: var(--primary-surface);
+  border-color: var(--primary-border);
+  color: var(--primary);
+}
+
+.btn-header-ai {
+  background: var(--primary);
+  color: #ffffff;
+  border: 1px solid var(--primary-dark);
+  box-shadow: var(--shadow-xs);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-header-ai:hover {
+  background: var(--primary-hover);
+  color: #ffffff;
+}
+
+.ai-sparkle-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7df38a;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.7; }
+}
+
+/* ==================== MAIN CONTENT AREA ==================== */
+.main-container {
+  flex: 1;
+  max-width: 1680px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== FILTER & CONTROL BAR ==================== */
+.filter-bar {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: var(--shadow-2xs);
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.filter-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Week Navigator Pill */
+.week-navigator {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-2xs);
+}
+
+.nav-week-btn {
+  padding: 6px 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--trans-fast);
+}
+
+.nav-week-btn:hover {
+  background: #f1f5f9;
+  color: var(--text-body);
+}
+
+.week-display-label {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+  border-left: 1px solid #f1f5f9;
+  border-right: 1px solid #f1f5f9;
+  white-space: nowrap;
+}
+
+.btn-today {
+  background: var(--primary-accent);
+  color: var(--primary-accent-text);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  box-shadow: var(--shadow-2xs);
+}
+
+.btn-today:hover {
+  background: var(--primary-accent-hover);
+}
+
+.filter-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.filter-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 4px;
+}
+
+.class-filter-chip {
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  white-space: nowrap;
+}
+
+.class-filter-chip:hover {
+  background: #f1f5f9;
+  color: var(--text-body);
+}
+
+.class-filter-chip.active {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: var(--shadow-xs);
+}
+
+/* ==================== VIEW MODES (FULL GRID VS SPLIT) ==================== */
+.view-mode-container {
+  position: relative;
+  flex: 1;
+}
+
+.view-section {
+  width: 100%;
+  transition: opacity var(--trans-normal), transform var(--trans-normal);
+}
+
+.view-section.hidden {
+  display: none !important;
+}
+
+/* Split View: 30% Left + 70% Right */
+.split-view-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+@media (min-width: 1280px) {
+  .split-view-layout {
+    grid-template-columns: 360px 1fr;
+    gap: 20px;
+  }
+}

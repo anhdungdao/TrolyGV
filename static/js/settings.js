@@ -5,6 +5,7 @@
 
 import { AppState, showToast, updateHeaderInfo } from './app.js';
 import { loadTimetableData } from './tab2-timetable.js';
+import { triggerAutoSync } from './drive-sync.js';
 
 export function initSettings() {
   const openBtn = document.getElementById('btn-open-settings');
@@ -71,8 +72,13 @@ export function initSettings() {
       current_semester: document.getElementById('setting-sem').value || 'HK1',
       start_date: document.getElementById('setting-start-date')?.value || '2026-09-07',
       google_drive_client_id: (document.getElementById('setting-drive-client-id')?.value || '').trim(),
-      google_drive_api_key: (document.getElementById('setting-drive-api-key')?.value || '').trim()
+      google_drive_api_key: (document.getElementById('setting-drive-key')?.value || '').trim()
     };
+
+    // 1. Lưu ngay vào localStorage (Local-First) để không bao giờ bị mất
+    AppState.settings = Object.assign({}, AppState.settings, updatedData);
+    localStorage.setItem('troly_gv_settings', JSON.stringify(AppState.settings));
+    updateHeaderInfo();
 
     try {
       const resp = await fetch('/api/settings', {
@@ -83,7 +89,8 @@ export function initSettings() {
 
       if (resp.ok) {
         const result = await resp.json();
-        AppState.settings = result.settings;
+        AppState.settings = Object.assign({}, AppState.settings, result.settings);
+        localStorage.setItem('troly_gv_settings', JSON.stringify(AppState.settings));
         updateHeaderInfo();
         modal.classList.add('hidden');
         showToast('Đã lưu cài đặt thành công!', 'success');
@@ -95,24 +102,51 @@ export function initSettings() {
         if (semSelect) semSelect.value = AppState.settings.current_semester;
 
         loadTimetableData(AppState.settings.current_year, AppState.settings.current_semester);
+
+        // Tự động đồng bộ cấu hình mới lên Google Drive
+        triggerAutoSync();
       } else {
-        showToast('Lỗi khi lưu cài đặt', 'error');
+        modal.classList.add('hidden');
+        showToast('Đã lưu cài đặt trên thiết bị này', 'info');
+        triggerAutoSync();
       }
     } catch (err) {
-      showToast('Không thể kết nối đến server', 'error');
+      modal.classList.add('hidden');
+      showToast('Đã lưu cài đặt cục bộ (offline)', 'info');
+      triggerAutoSync();
     }
   });
 }
 
 export async function loadSettings() {
+  // 1. Local-First: Nạp ngay từ localStorage trong 0ms
+  try {
+    const cached = localStorage.getItem('troly_gv_settings');
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      AppState.settings = Object.assign({}, AppState.settings, parsed);
+    }
+  } catch (e) {}
+
+  // 2. Đồng bộ ngầm với backend
   try {
     const resp = await fetch('/api/settings');
     if (resp.ok) {
-      const data = await resp.json();
-      AppState.settings = data;
+      const serverSettings = await resp.json();
+      // Nếu server rỗng key nhưng local có key, ưu tiên local và cập nhật lên server
+      const localKey = AppState.settings.gemini_api_key;
+      const localClientId = AppState.settings.google_drive_client_id;
+      if (localKey && !serverSettings.gemini_api_key) {
+        serverSettings.gemini_api_key = localKey;
+      }
+      if (localClientId && !serverSettings.google_drive_client_id) {
+        serverSettings.google_drive_client_id = localClientId;
+      }
+      AppState.settings = Object.assign({}, AppState.settings, serverSettings);
+      localStorage.setItem('troly_gv_settings', JSON.stringify(AppState.settings));
     }
   } catch (err) {
-    console.warn('Sử dụng cài đặt mặc định do chưa tải được cấu hình');
+    console.warn('Sử dụng cài đặt cục bộ đã lưu do chưa tải được cấu hình server');
   }
 }
 

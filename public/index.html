@@ -3,493 +3,425 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trợ Lý Giáo Viên AI - Thời Khoá Biểu & Giáo Án</title>
-  <!-- Google Fonts Outfit & Inter for high visual aesthetic -->
+  <title>EduPlan AI - Thời Khoá Biểu & Giáo Án Cô Linh</title>
+  
+  <!-- Modern Google Fonts Matching UINew -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="/css/style.css?v=2.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Design System Modules -->
+  <link rel="stylesheet" href="/css/tokens.css?v=2.4">
+  <link rel="stylesheet" href="/css/layout.css?v=2.4">
+  <link rel="stylesheet" href="/css/timetable.css?v=2.4">
+  <link rel="stylesheet" href="/css/lesson-detail.css?v=2.4">
+  <link rel="stylesheet" href="/css/ai-drawer.css?v=2.4">
+  <link rel="stylesheet" href="/css/modals.css?v=2.4">
+  <link rel="stylesheet" href="/css/mobile.css?v=2.4">
+
+  <!-- Google Identity Services (GIS) for Google Drive Auth -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
-  <!-- Top App Navigation Bar -->
-  <header class="app-header">
-    <div class="header-left">
-      <div class="brand-logo">
-        <span class="logo-icon">📚</span>
-        <div class="brand-text">
-          <span class="brand-title">Giáo Án & Thời Khoá Biểu</span>
-          <span class="brand-subtitle" id="header-teacher-name">Giáo viên • Toàn trường</span>
+  <div class="app-wrapper">
+    <!-- Top App Navigation Bar -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-icon">🌿</div>
+        <div class="brand-info">
+          <div class="brand-title-group">
+            <span class="brand-title">EduPlan AI</span>
+            <span class="brand-subject-badge" id="header-teacher-name">Cô Linh • Toàn trường</span>
+          </div>
         </div>
       </div>
-      
-      <!-- Tab Navigation Switcher -->
-      <nav class="tab-nav">
-        <button class="tab-btn active" data-tab="tab-chat" id="nav-tab-chat">
-          <span class="tab-icon">✨</span>
-          <span class="tab-label">Trợ Lý AI & Tạo TKB</span>
-          <span class="badge-dot" id="chat-badge-dot"></span>
-        </button>
-        <button class="tab-btn" data-tab="tab-timetable" id="nav-tab-timetable">
-          <span class="tab-icon">📅</span>
-          <span class="tab-label">Thời Khoá Biểu</span>
-          <span class="badge-count" id="timetable-count-badge">0 tiết</span>
-        </button>
-      </nav>
-    </div>
 
-    <div class="header-right">
-      <!-- Current Academic Term Badge -->
-      <div class="term-badge" id="current-term-badge" title="Năm học và học kỳ đang hiển thị">
-        <span class="term-icon">🎓</span>
-        <span id="term-badge-text">2025-2026 • HK1</span>
+      <div class="header-center">
+        <div class="header-term-pill" id="header-term-pill" title="Năm học & Học kỳ hiện tại">
+          2025-2026 • HK1
+        </div>
       </div>
 
-      <!-- Settings Button -->
-      <button class="icon-btn" id="btn-open-settings" title="Cài đặt hệ thống & API Key">
-        <span class="icon">⚙️</span>
-        <span class="btn-text">Cài đặt</span>
-      </button>
-    </div>
-  </header>
+      <div class="header-right">
+        <!-- Google Drive Sync Button -->
+        <button class="btn-header" id="btn-header-sync" title="Trạng thái kết nối Google Drive & đồng bộ đám mây">
+          <span class="sync-dot" id="header-sync-dot"></span>
+          <span id="header-sync-text">Đồng bộ Drive</span>
+        </button>
 
-  <!-- Main App Content Area -->
-  <main class="app-main">
+        <!-- AI Assistant Drawer Trigger -->
+        <button class="btn-header btn-header-ai" id="btn-open-ai-drawer" title="Mở ngăn kéo Trợ lý Giáo viên AI">
+          <span class="ai-sparkle-dot"></span>
+          <span>✨ Trợ lý AI</span>
+        </button>
 
-    <!-- ==================== TAB 1: AI CHAT ==================== -->
-    <section class="tab-content active" id="tab-chat">
-      <div class="chat-wrapper">
+        <!-- Settings Button -->
+        <button class="btn-header" id="btn-open-settings" title="Cài đặt hệ thống & API Key">
+          <span>⚙️ Cài đặt</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main App Content Area -->
+    <main class="main-container">
+
+      <!-- Sub-header: Filter Bar & Week Navigator -->
+      <section class="filter-bar">
+        <div class="filter-left">
+          <div class="week-navigator">
+            <button class="nav-week-btn" id="btn-prev-week" title="Tuần trước">‹</button>
+            <span class="week-display-label" id="week-nav-label">Tuần 1 (07/09 - 12/09)</span>
+            <button class="nav-week-btn" id="btn-next-week" title="Tuần sau">›</button>
+          </div>
+
+          <button class="btn-today" id="btn-jump-today" title="Nhảy nhanh về tuần và ngày hôm nay">
+            Hôm nay
+          </button>
+        </div>
+
+        <!-- Class Filter Chips Container -->
+        <div class="filter-right" id="class-filter-chips">
+          <span class="filter-label">🏷️ Lớp:</span>
+          <button class="class-filter-chip active" data-class="ALL">Tất cả</button>
+        </div>
+      </section>
+
+      <!-- Mobile Day Switcher Bar (Hidden on desktop, visible on mobile) -->
+      <div class="mobile-day-selector">
+        <button class="mobile-day-chip active" data-day="2">T2</button>
+        <button class="mobile-day-chip" data-day="3">T3</button>
+        <button class="mobile-day-chip" data-day="4">T4</button>
+        <button class="mobile-day-chip" data-day="5">T5</button>
+        <button class="mobile-day-chip" data-day="6">T6</button>
+        <button class="mobile-day-chip" data-day="7">T7</button>
+      </div>
+
+      <!-- View Modes Container -->
+      <div class="view-mode-container">
         
-        <!-- Chat Message History -->
-        <div class="chat-messages" id="chat-messages">
-          <!-- Welcome message card -->
-          <div class="message-card assistant welcome-msg">
-            <div class="avatar">✨</div>
-            <div class="msg-body">
-              <div class="msg-header">
-                <strong>Trợ lý Giáo viên AI</strong>
-                <span class="time">Vừa xong</span>
-              </div>
-              <div class="msg-content">
-                <p>Em chào <strong>Thầy/Cô</strong>! Em là trợ lý AI thông minh hỗ trợ các thầy cô tự động lọc thời khoá biểu và chuẩn bị giáo án từng tuần.</p>
-                <div class="welcome-guide">
-                  <div class="guide-item">
-                    <span class="guide-icon">📸</span>
-                    <div>
-                      <strong>Tạo thời khoá biểu tự động:</strong>
-                      <p>Thầy/Cô hãy bấm nút đính kèm 📎 tải lên ảnh chụp hoặc file Excel TKB trường. Em sẽ tự động lọc đúng lịch dạy theo tên và môn của thầy cô vào bảng thời khoá biểu!</p>
-                    </div>
-                  </div>
-                  <div class="guide-item">
-                    <span class="guide-icon">📂</span>
-                    <div>
-                      <strong>Tích hợp Google Drive:</strong>
-                      <p>Mỗi tiết dạy đều có thể tìm kiếm giáo án Slide, Word, bài tập trực tiếp từ Drive và mở sửa nhanh chóng.</p>
-                    </div>
-                  </div>
-                  <div class="guide-item" id="welcome-btn-open-settings" style="cursor: pointer; background: #f5f3ff; border-color: #ddd6fe;" title="Bấm để mở bảng Cài đặt API & Client ID">
-                    <span class="guide-icon">⚙️</span>
-                    <div>
-                      <strong style="color: #4f46e5;">Cài đặt API Key & Client ID:</strong>
-                      <p style="color: #6366f1; margin-top: 2px;">👉 Bấm vào đây để cài đặt Gemini API Key, đổi Model và Google Drive Client ID.</p>
-                    </div>
-                  </div>
+        <!-- 1. FULL WEEK TIMETABLE GRID VIEW (DEFAULT ACTIVE) -->
+        <div class="view-section" id="full-grid-view">
+          <div class="timetable-grid-wrapper">
+            <table class="timetable-table" id="timetable-grid-table">
+              <thead>
+                <tr>
+                  <th class="col-period-label">Tiết</th>
+                  <th class="col-day" data-day="2">Thứ Hai</th>
+                  <th class="col-day" data-day="3">Thứ Ba</th>
+                  <th class="col-day" data-day="4">Thứ Tư</th>
+                  <th class="col-day" data-day="5">Thứ Năm</th>
+                  <th class="col-day" data-day="6">Thứ Sáu</th>
+                  <th class="col-day" data-day="7">Thứ Bảy</th>
+                </tr>
+              </thead>
+              <tbody id="timetable-tbody">
+                <!-- Populated dynamically by timetable-grid.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 2. MASTER-DETAIL SPLIT VIEW (ACTIVATED ON PERIOD CLICK) -->
+        <div class="view-section hidden" id="split-view-container">
+          <div class="split-view-layout">
+            
+            <!-- 30% Single Day Sidebar -->
+            <aside class="single-day-sidebar">
+              <div class="day-sidebar-header">
+                <button class="btn-back-grid" id="btn-back-to-full-grid" title="Trở lại xem toàn bộ tuần">
+                  ← Xem cả tuần
+                </button>
+                <div class="day-title-row">
+                  <span class="day-big-name" id="sidebar-day-name">Thứ Hai</span>
+                  <span class="day-big-date" id="sidebar-day-date">(07/09)</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chat Input & File Drop Area -->
-        <div class="chat-input-container">
-          <!-- File Preview Banner (when user chooses a file) -->
-          <div class="file-preview-bar hidden" id="file-preview-bar">
-            <div class="file-info">
-              <span class="file-icon">📎</span>
-              <span class="file-name" id="preview-file-name">file_tkb.xlsx</span>
-              <span class="file-size" id="preview-file-size">(245 KB)</span>
-            </div>
-            <button class="btn-remove-file" id="btn-cancel-file" title="Bỏ file này">✕</button>
-          </div>
-
-          <form class="chat-input-form" id="chat-form">
-            <!-- Hidden File Input -->
-            <input type="file" id="chat-file-input" accept="image/*,.pdf,.xlsx,.xls,.csv,.txt,.docx,.pptx" class="hidden">
-            
-            <!-- Attach File Button -->
-            <button type="button" class="btn-attach" id="btn-attach-file" title="Tải file TKB (Ảnh, Excel, PDF...)">
-              <span>📎</span>
-            </button>
-
-            <!-- Text input -->
-            <textarea 
-              id="chat-textarea" 
-              rows="1" 
-              placeholder="Gửi file TKB hoặc chat với trợ lý (Ví dụ: 'Lọc lịch dạy cho Thầy Nam môn Toán khối 10')..." 
-              required></textarea>
-
-            <!-- Send Button -->
-            <button type="submit" class="btn-send" id="btn-send-chat" title="Gửi tin nhắn (Enter)">
-              <span class="send-icon">➤</span>
-            </button>
-          </form>
-          <div class="input-hint">
-            <span>💡 Mẹo: Bấm <strong>Shift + Enter</strong> để xuống dòng. Nhấn <strong>Enter</strong> để gửi.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 2: TIMETABLE ==================== -->
-    <section class="tab-content" id="tab-timetable">
-      <div class="timetable-container">
-        
-        <!-- Timetable Top Filter Bar -->
-        <div class="timetable-toolbar">
-          <div class="toolbar-left">
-            
-            <!-- Academic Year & Semester Pill Group -->
-            <div class="pill-group">
-              <div class="pill-item">
-                <span class="pill-label">Năm học:</span>
-                <select id="select-academic-year" class="toolbar-select">
-                  <option value="2025-2026" selected>2025-2026</option>
-                  <option value="2024-2025">2024-2025</option>
-                  <option value="2023-2024">2023-2024</option>
-                </select>
-              </div>
-
-              <div class="pill-divider"></div>
-
-              <div class="pill-item">
-                <span class="pill-label">Học kỳ:</span>
-                <select id="select-semester" class="toolbar-select">
-                  <option value="HK1" selected>Học kỳ 1</option>
-                  <option value="HK2">Học kỳ 2</option>
-                </select>
-                <button class="btn-tool-icon" id="btn-add-term" title="Thêm năm học / kỳ học mới">➕</button>
-                <button class="btn-tool-icon btn-tool-danger" id="btn-del-term" title="Xoá kỳ học này">🗑️</button>
-              </div>
-            </div>
-
-            <!-- Week Navigator Pill Group -->
-            <div class="pill-group week-pill-group">
-              <button class="btn-week-step" id="btn-prev-week" title="Về tuần trước">
-                <span>◀</span>
-              </button>
-              <div class="pill-item week-select-wrap">
-                <select id="select-week" class="toolbar-select week-select-main">
-                  <option value="1">Tuần 1</option>
-                </select>
-              </div>
-              <button class="btn-week-step" id="btn-next-week" title="Sang tuần sau">
-                <span>▶</span>
-              </button>
-              <div class="pill-divider"></div>
-              <button class="btn-tool-text" id="btn-add-week" title="Tạo tuần tiếp theo (Tự tăng số tuần và giữ nguyên TKB)">
-                <span>+ Tuần mới</span>
-              </button>
-              <button class="btn-tool-icon btn-tool-danger" id="btn-del-week" title="Xoá tuần học này">
-                <span>🗑️</span>
-              </button>
-            </div>
-
-            <!-- Reuse Next Year Button -->
-            <button class="btn-reuse-pill" id="btn-reuse-next-year" title="Sao chép toàn bộ TKB và giáo án sang kỳ 1 năm học sau">
-              <span class="icon">♻️</span>
-              <span>Tái sử dụng năm sau</span>
-            </button>
-          </div>
-
-          <div class="toolbar-right">
-            <span class="stat-badge" id="tt-total-badge">Tổng: 0 tiết/tuần</span>
-            <button class="btn-primary btn-save-all" id="btn-save-current-tt" title="Lưu lại toàn bộ lịch">
-              <span>💾 Lưu toàn bộ</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Master-Detail Timetable Layout -->
-        <div class="timetable-workspace" id="timetable-workspace">
-          
-          <!-- FULL WEEK GRID VIEW (Mặc định cả tuần) -->
-          <div class="full-grid-view" id="full-grid-view">
-            <div class="grid-table-container">
-              <table class="timetable-grid" id="timetable-grid-table">
-                <thead>
-                  <tr>
-                    <th class="col-period">Tiết / Buổi</th>
-                    <th class="col-day" data-day="2">Thứ Hai</th>
-                    <th class="col-day" data-day="3">Thứ Ba</th>
-                    <th class="col-day" data-day="4">Thứ Tư</th>
-                    <th class="col-day" data-day="5">Thứ Năm</th>
-                    <th class="col-day" data-day="6">Thứ Sáu</th>
-                    <th class="col-day" data-day="7">Thứ Bảy</th>
-                  </tr>
-                </thead>
-                <tbody id="timetable-tbody">
-                  <!-- Generated dynamically by tab2-timetable.js -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- SPLIT / COLLAPSED DETAIL VIEW (Khi click vào 1 tiết) -->
-          <div class="split-detail-view hidden" id="split-detail-view">
-            
-            <!-- Left Compact Sidebar (Lịch thu gọn trong ngày) -->
-            <aside class="compact-day-sidebar">
-              <div class="sidebar-header">
-                <button class="btn-back-grid" id="btn-back-to-full-grid" title="Trở lại xem cả tuần">
-                  <span>← Xem cả tuần</span>
-                </button>
-                <h3 id="sidebar-day-title">Thứ Hai</h3>
-              </div>
-              <div class="compact-period-list" id="compact-period-list">
-                <!-- 10 period items for selected day -->
+              <div class="day-periods-scroll" id="compact-period-list">
+                <!-- Populated by single-day.js -->
               </div>
             </aside>
 
-            <!-- Right Main Area: Chi tiết tiết học & Google Drive -->
+            <!-- 70% Lesson Detail & Drive Panel -->
             <section class="lesson-detail-panel" id="lesson-detail-panel">
+              
+              <!-- Panel Header -->
               <div class="panel-header">
                 <div class="panel-title-group">
-                  <span class="period-tag" id="panel-period-tag">Thứ 2 • Tiết 1</span>
-                  <h2 id="panel-class-title">Lớp 10A1 - Môn Ngữ văn</h2>
-                  <span class="time-range-sub" id="panel-time-sub">07:00 - 07:45 (Phòng 201)</span>
+                  <span class="panel-period-badge" id="panel-period-tag">Thứ Hai • Tiết 1</span>
+                  <h2 class="panel-heading" id="panel-class-title">Lớp 10A1 - Môn Tin học</h2>
+                  <div class="panel-meta-line" id="panel-time-sub">07:00 - 07:45 • Phòng 101</div>
                 </div>
-                <button class="btn-primary" id="btn-save-lesson-detail">
-                  <span>💾 Lưu nội dung tiết học</span>
-                </button>
+                <div class="panel-actions">
+                  <button class="btn-panel-ai" id="btn-ai-analyze-doc" title="AI tự động phân tích giáo án/slide đính kèm để trích xuất tên bài và mục tiêu">
+                    <span>✨ AI Tự điền từ tài liệu</span>
+                  </button>
+                  <button class="btn-panel-save" id="btn-save-lesson-detail">
+                    <span>💾 Lưu bài học</span>
+                  </button>
+                </div>
               </div>
 
-              <div class="panel-content-grid">
+              <!-- Panel Form Body -->
+              <div class="panel-body">
                 
-                <!-- Lesson Form Info -->
-                <div class="lesson-form-card">
-                  <div class="lesson-card-header-row">
-                    <div class="card-title-left">
-                      <span class="card-icon">📝</span>
-                      <h3 class="section-title">Thông tin bài dạy</h3>
-                    </div>
-                    <button type="button" class="btn-ai-auto" id="btn-ai-analyze-doc" title="Dùng Gemini AI đọc tài liệu đính kèm để tự điền tên bài và mục tiêu">
-                      <span class="ai-sparkle">✨</span>
-                      <span>AI Tự điền từ tài liệu</span>
+                <div class="form-group-item">
+                  <label class="form-label-text" for="input-lesson-title">Tên bài dạy / Chủ đề bài học</label>
+                  <input type="text" id="input-lesson-title" class="form-input-box" placeholder="Ví dụ: Bài 1: Thông tin và xử lý thông tin trong tin học">
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group-item">
+                    <label class="form-label-text" for="input-lesson-class">Lớp học</label>
+                    <input type="text" id="input-lesson-class" class="form-input-box" placeholder="Ví dụ: 10A1">
+                  </div>
+                  <div class="form-group-item">
+                    <label class="form-label-text" for="input-lesson-room">Phòng học</label>
+                    <input type="text" id="input-lesson-room" class="form-input-box" placeholder="Ví dụ: Phòng Tin 1">
+                  </div>
+                </div>
+
+                <div class="form-group-item">
+                  <label class="form-label-text" for="input-lesson-objective">Mục tiêu cần đạt</label>
+                  <textarea id="input-lesson-objective" class="form-input-box" rows="3" placeholder="Nhập mục tiêu bài học hoặc nhấn 'AI Tự điền' để tự trích xuất từ giáo án"></textarea>
+                </div>
+
+                <div class="form-group-item">
+                  <label class="form-label-text" for="input-lesson-notes">Ghi chú & Dặn dò học sinh</label>
+                  <textarea id="input-lesson-notes" class="form-input-box" rows="2" placeholder="Ví dụ: Nhắc học sinh mang theo vở bài tập, làm trước bài trắc nghiệm"></textarea>
+                </div>
+
+                <!-- Google Drive Documents Section -->
+                <div class="drive-attach-section">
+                  <div class="drive-attach-header">
+                    <span class="drive-attach-title">📂 Tài Liệu & Giáo Án (Google Drive)</span>
+                    <button class="btn-header" id="btn-connect-drive" style="padding: 4px 10px; font-size: 0.75rem;">
+                      <span id="drive-connect-text">🔗 Kết nối Google Drive</span>
                     </button>
                   </div>
-                  
-                  <div class="form-group">
-                    <label for="input-lesson-title">Tên bài học / Tiết dạy:</label>
-                    <input type="text" id="input-lesson-title" class="form-control" placeholder="Ví dụ: Bài 1: Tổng quan văn học Việt Nam (Tiết 1)...">
-                  </div>
 
-                  <div class="form-row">
-                    <div class="form-group half">
-                      <label for="input-lesson-class">Lớp học:</label>
-                      <input type="text" id="input-lesson-class" class="form-control" placeholder="10A1">
-                    </div>
-                    <div class="form-group half">
-                      <label for="input-lesson-room">Phòng học:</label>
-                      <input type="text" id="input-lesson-room" class="form-control" placeholder="P.201">
+                  <!-- Drive Search Box with Live Results -->
+                  <div class="drive-search-wrapper">
+                    <input type="text" id="drive-search-input" class="drive-search-input" placeholder="Tìm giáo án, slide bài giảng, đề kiểm tra trong Google Drive...">
+                    <button class="btn-header hidden" id="btn-clear-drive-search" style="padding: 4px 8px;">✕</button>
+                    <div class="drive-search-dropdown hidden" id="drive-search-results">
+                      <!-- Populated dynamically -->
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <label for="input-lesson-objective">Mục tiêu bài học / Trọng tâm:</label>
-                    <textarea id="input-lesson-objective" class="form-control" rows="2" placeholder="Kiến thức trọng tâm, phương pháp hoặc năng lực cần đạt..."></textarea>
+                  <!-- Direct Upload Button -->
+                  <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                    <input type="file" id="input-direct-upload" style="display: none;">
+                    <button class="btn-header" onclick="document.getElementById('input-direct-upload').click();" style="font-size: 0.75rem;">
+                      <span>📤 Tải tệp từ máy tính lên Drive</span>
+                    </button>
+                    <span style="font-size: 0.72rem; color: var(--text-muted);">(Hỗ trợ .docx, .pdf, .pptx, hình ảnh)</span>
                   </div>
 
-                  <div class="form-group">
-                    <label for="input-lesson-notes">Ghi chú giáo viên:</label>
-                    <input type="text" id="input-lesson-notes" class="form-control" placeholder="Nhắc học sinh mang SGK, dặn dò bài tập về nhà...">
-                  </div>
-                </div>
-
-                <!-- Google Drive Integration Card -->
-                <div class="drive-files-card">
-                  <div class="drive-card-header">
-                    <div class="drive-title">
-                      <span class="drive-logo">📁</span>
-                      <h3 class="section-title">Giáo án & Tài liệu (Google Drive)</h3>
-                    </div>
-                    <div class="drive-header-actions" style="display: flex; gap: 8px; align-items: center;">
-                      <button type="button" class="btn-secondary" id="btn-connect-drive" style="font-size: 0.78rem; padding: 6px 10px; border-radius: 6px; cursor: pointer;" title="Đăng nhập tài khoản Google Drive để đồng bộ">
-                        <span id="drive-connect-text">🔗 Kết nối Google Drive</span>
-                      </button>
-                      <!-- Upload directly button -->
-                      <label class="btn-upload-drive" title="Tải file lên">
-                        <span>⬆ Tải file lên</span>
-                        <input type="file" id="input-direct-upload" class="hidden">
-                      </label>
-                    </div>
-                  </div>
-
-                  <!-- In-Drive Live Search Bar -->
-                  <div class="drive-search-box">
-                    <div class="search-input-wrapper">
-                      <span class="search-icon">🔍</span>
-                      <input 
-                        type="text" 
-                        id="drive-search-input" 
-                        class="form-control search-input" 
-                        placeholder="Tìm kiếm tài liệu, Slide, bài giảng trong Drive...">
-                      <button class="btn-clear-search hidden" id="btn-clear-drive-search">✕</button>
-                    </div>
-                    
-                    <!-- Search Results Dropdown/List -->
-                    <div class="drive-search-results hidden" id="drive-search-results">
-                      <!-- Result items injected by drive-search.js -->
-                    </div>
-                  </div>
-
-                  <!-- Attached Files in this Period -->
-                  <div class="attached-files-container">
-                    <h4>📌 Tài liệu đã đính kèm vào tiết này:</h4>
-                    <div class="attached-files-list" id="attached-files-list">
-                      <!-- Attached chips injected by drive-search.js -->
-                      <p class="empty-files-text">Chưa có tài liệu nào. Tìm kiếm ở trên hoặc tải file lên để đính kèm.</p>
+                  <!-- Attached Files Chips List -->
+                  <div style="margin-top: 8px;">
+                    <label class="form-label-text" style="font-size: 0.75rem; color: var(--text-muted);">Tài liệu đã đính kèm vào tiết này:</label>
+                    <div class="attached-docs-grid" id="attached-files-list">
+                      <p style="font-size: 0.76rem; color: #94a3b8; padding: 4px 0;">Chưa có tài liệu nào được đính kèm vào tiết này.</p>
                     </div>
                   </div>
                 </div>
 
               </div>
-            </section>
-          </div>
 
+            </section>
+
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- AI ASSISTANT SLIDE-OVER DRAWER -->
+  <div class="ai-drawer-backdrop" id="ai-drawer-backdrop"></div>
+  <aside class="ai-drawer" id="ai-assistant-drawer">
+    
+    <!-- Drawer Header -->
+    <div class="ai-drawer-header">
+      <div class="ai-drawer-title-group">
+        <div class="ai-avatar">✨</div>
+        <div class="ai-drawer-title-text">
+          <h3>Trợ lý Giáo viên AI</h3>
+          <p>Tự động lập lịch & hỗ trợ giáo án thông minh</p>
         </div>
       </div>
-    </section>
+      <div class="ai-drawer-actions">
+        <button class="ai-drawer-btn" id="btn-clear-ai-chat" title="Làm mới đoạn hội thoại">🗑️</button>
+        <button class="ai-drawer-btn" id="btn-close-ai-drawer" title="Đóng">✕</button>
+      </div>
+    </div>
 
-  </main>
+    <!-- Quick Suggestion Chips -->
+    <div class="ai-drawer-suggestions" id="drawer-suggestions">
+      <button class="ai-suggestion-chip" data-prompt="Lên lịch dạy tuần này cho tôi">
+        <span>🗓️</span> Lên lịch tuần này
+      </button>
+      <button class="ai-suggestion-chip" data-prompt="Gợi ý giáo án và mục tiêu bài học môn Tin">
+        <span>📝</span> Gợi ý giáo án
+      </button>
+      <button class="ai-suggestion-chip" data-prompt="Đổi tiết thứ 2 sáng sang thứ 4 chiều">
+        <span>🔄</span> Đổi tiết dạy
+      </button>
+    </div>
 
-  <!-- ==================== MODAL: CÀI ĐẶT HỆ THỐNG ==================== -->
-  <div class="modal-overlay hidden" id="settings-modal">
-    <div class="modal-dialog">
+    <!-- Message History Body -->
+    <div class="ai-messages-container" id="drawer-messages">
+      <div class="ai-empty-state">
+        <div class="ai-empty-icon">✨</div>
+        <h4>Trợ lý Giáo viên AI</h4>
+        <p>Thầy/Cô hãy gửi tin nhắn hoặc bấm đính kèm 📎 tải ảnh TKB trường để em tự động tạo thời khoá biểu tuần nhé!</p>
+      </div>
+    </div>
+
+    <!-- Attachment Preview Bar -->
+    <div class="ai-attachment-preview" id="drawer-attachment-preview">
+      <div class="ai-attachment-info">
+        <span>📎</span>
+        <span id="drawer-attachment-name">ten_file.xlsx</span>
+      </div>
+      <button class="ai-remove-attachment-btn" id="btn-drawer-remove-attach">✕</button>
+    </div>
+
+    <!-- Drawer Footer / Input Form -->
+    <div class="ai-drawer-footer">
+      <form class="ai-input-form" id="drawer-chat-form">
+        <input type="file" id="drawer-file-input" style="display: none;" accept="image/*,.xlsx,.xls,.csv,.pdf,.docx">
+        
+        <div class="ai-input-wrapper">
+          <textarea id="drawer-chat-textarea" class="ai-textarea" rows="1" placeholder="Nhập yêu cầu hoặc hỏi đáp với AI..."></textarea>
+          <button type="button" class="ai-attach-btn" id="btn-drawer-attach" title="Đính kèm ảnh hoặc tệp TKB">📎</button>
+        </div>
+
+        <button type="submit" class="ai-send-btn" id="btn-drawer-send" title="Gửi tin nhắn">
+          <span>➤</span>
+        </button>
+      </form>
+    </div>
+
+  </aside>
+
+  <!-- SETTINGS MODAL -->
+  <div class="modal-backdrop" id="settings-modal">
+    <div class="modal-card">
       <div class="modal-header">
         <div class="modal-title-group">
-          <span class="modal-icon">⚙️</span>
+          <div class="modal-icon">⚙️</div>
           <h3>Cài Đặt Hệ Thống</h3>
         </div>
-        <button class="btn-close-modal" id="btn-close-settings">✕</button>
+        <button class="modal-close-btn" id="btn-close-settings">✕</button>
       </div>
-      
-      <div class="modal-body">
-        <form id="settings-form">
+
+      <form id="settings-form">
+        <div class="modal-body">
           
-          <div class="settings-section">
-            <h4 class="settings-sec-title">🤖 Trợ Lý Gemini AI</h4>
-            <div class="form-group">
-              <label for="setting-gemini-key">Gemini API Key:</label>
-              <div class="password-input-group">
-                <input type="password" id="setting-gemini-key" class="form-control" placeholder="AIzaSy...">
-                <button type="button" class="btn-toggle-eye" id="btn-toggle-gemini-key">👁️</button>
-              </div>
-              <small class="form-text">Khoá API được lưu an toàn trên máy của cô để gửi yêu cầu đến mô hình Gemini.</small>
+          <!-- Cloud Drive Sync Status Box -->
+          <div class="sync-status-box">
+            <div class="sync-status-left">
+              <span class="sync-dot online"></span>
+              <span>Đồng bộ đám mây (Google Drive)</span>
             </div>
-            <div class="form-group" style="margin-top: 12px;">
-              <label for="setting-gemini-model">Mô hình AI (Model):</label>
-              <select id="setting-gemini-model" class="form-select">
-                <option value="gemini-3.1-flash-lite" selected>Gemini 3.1 Flash Lite (RPD 500, RPM 15 - Mặc định)</option>
-                <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash Lite (RPD 500, RPM 15)</option>
-                <option value="auto-rotate">⚡ Tự động luân chuyển 3.1 & 3.5 Flash Lite khi hết quota (Khuyên dùng)</option>
-                <option value="gemini-flash-lite-latest">Gemini Flash Lite Latest</option>
-                <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
-                <option value="gemini-2.5-pro">Gemini 2.5 Pro (Phân tích chuyên sâu)</option>
-              </select>
-              <small class="form-text">Mô hình 3.1 & 3.5 Flash Lite có hạn ngạch tới 500 lượt/ngày (gấp 25 lần so với 2.5 Flash). Khi một model hết token/quota hệ thống sẽ tự động chuyển đổi.</small>
+            <div class="sync-actions">
+              <button type="button" class="btn-secondary" id="btn-settings-manual-sync">
+                <span>🔄 Đồng bộ ngay</span>
+              </button>
+              <button type="button" class="btn-secondary" id="btn-settings-restore-backup" title="Khôi phục toàn bộ dữ liệu từ tệp sao lưu Drive">
+                <span>📥 Khôi phục</span>
+              </button>
             </div>
           </div>
 
-          <div class="settings-section">
-            <h4 class="settings-sec-title">👩‍🏫 Thông Tin Giáo Viên</h4>
-            <div class="form-row">
-              <div class="form-group half">
-                <label for="setting-teacher-name">Tên giáo viên:</label>
-                <input type="text" id="setting-teacher-name" class="form-control" placeholder="Ví dụ: Thầy Nam, Cô Hương...">
-              </div>
-              <div class="form-group half">
-                <label for="setting-subject">Môn phụ trách:</label>
-                <input type="text" id="setting-subject" class="form-control" placeholder="Ví dụ: Ngữ văn, Toán, Tiếng Anh...">
-              </div>
+          <!-- Teacher & School Year Section -->
+          <div class="modal-section">
+            <h4 class="modal-section-title">👩‍🏫 Thông Tin Giáo Viên & Năm Học</h4>
+            
+            <div class="form-group">
+              <label class="form-label" for="setting-teacher-name">Họ và tên giáo viên</label>
+              <input type="text" id="setting-teacher-name" class="form-input" placeholder="Ví dụ: Cô Linh">
             </div>
-            <div class="form-row">
-              <div class="form-group half">
-                <label for="setting-year">Năm học mặc định:</label>
-                <input type="text" id="setting-year" class="form-control" value="2025-2026">
+
+            <div class="form-group">
+              <label class="form-label" for="setting-subject">Môn phụ trách</label>
+              <input type="text" id="setting-subject" class="form-input" placeholder="Ví dụ: Tin học / Toàn trường">
+            </div>
+
+            <div class="meta-form-row">
+              <div class="form-group">
+                <label class="form-label" for="setting-year">Năm học</label>
+                <input type="text" id="setting-year" class="form-input" placeholder="2025-2026">
               </div>
-              <div class="form-group half">
-                <label for="setting-sem">Học kỳ mặc định:</label>
-                <select id="setting-sem" class="form-select">
-                  <option value="HK1" selected>Học kỳ 1</option>
+              <div class="form-group">
+                <label class="form-label" for="setting-sem">Học kỳ</label>
+                <select id="setting-sem" class="form-input">
+                  <option value="HK1">Học kỳ 1</option>
                   <option value="HK2">Học kỳ 2</option>
                 </select>
               </div>
             </div>
-            <div class="form-group" style="margin-top: 8px;">
-              <label for="setting-start-date">📅 Ngày bắt đầu Tuần 1 (Thứ Hai):</label>
-              <input type="date" id="setting-start-date" class="form-control" value="2026-09-07">
-              <small class="form-text">Dùng để tự động tính ngày tháng chính xác cho từng tuần và làm mờ các ngày đã qua.</small>
-            </div>
-          </div>
 
-          <div class="settings-section">
-            <h4 class="settings-sec-title">☁️ Tích Hợp Google Drive</h4>
             <div class="form-group">
-              <label for="setting-drive-client-id">Google OAuth Client ID (Dùng để upload & xem file trên Drive cá nhân):</label>
-              <input type="text" id="setting-drive-client-id" class="form-control" placeholder="Ví dụ: 123456789-abc.apps.googleusercontent.com">
-              <small class="form-text">Tạo miễn phí tại Google Cloud Console (OAuth 2.0 Client ID) để cấp quyền tải file lên Drive của cô.</small>
-            </div>
-            <div class="form-group" style="margin-top: 10px;">
-              <label for="setting-drive-key">Google Drive API Key (Tìm kiếm file công khai):</label>
-              <input type="text" id="setting-drive-key" class="form-control" placeholder="AIzaSy...">
+              <label class="form-label" for="setting-start-date">Ngày Thứ 2 bắt đầu Tuần 1</label>
+              <input type="date" id="setting-start-date" class="form-input">
             </div>
           </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn-secondary" id="btn-cancel-settings">Huỷ</button>
-            <button type="submit" class="btn-primary">💾 Lưu cài đặt</button>
+          <!-- Google Drive API Section -->
+          <div class="modal-section">
+            <h4 class="modal-section-title">☁️ Google Drive OAuth 2.0</h4>
+            
+            <div class="form-group">
+              <label class="form-label" for="setting-drive-client-id">OAuth Client ID</label>
+              <input type="text" id="setting-drive-client-id" class="form-input" placeholder="Ví dụ: xxxxx.apps.googleusercontent.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="setting-drive-key">Google Drive API Key</label>
+              <input type="password" id="setting-drive-key" class="form-input" placeholder="AIzaSy...">
+            </div>
           </div>
-        </form>
-      </div>
-    </div>
-  </div>
 
-  <!-- ==================== MODAL: KHO LƯU TRỮ KỲ CŨ (ARCHIVE) ==================== -->
-  <div class="modal-overlay hidden" id="archive-modal">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-header">
-        <div class="modal-title-group">
-          <span class="modal-icon">📁</span>
-          <h3>Kho Lưu Trữ Các Kỳ Học Đã Qua</h3>
+          <!-- Gemini API Section -->
+          <div class="modal-section">
+            <h4 class="modal-section-title">✨ Gemini AI API</h4>
+            
+            <div class="form-group">
+              <label class="form-label" for="setting-gemini-key">Gemini API Key</label>
+              <div style="display: flex; gap: 0.5rem;">
+                <input type="password" id="setting-gemini-key" class="form-input" placeholder="AIzaSy...">
+                <button type="button" class="btn-secondary" id="btn-toggle-gemini-key">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="setting-gemini-model">Mô hình AI</label>
+              <select id="setting-gemini-model" class="form-input">
+                <option value="gemini-2.5-flash">Gemini 2.5 Flash (Nhanh & Tối ưu)</option>
+                <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                <option value="gemini-1.5-pro">Gemini 1.5 Pro (Độ chính xác cao)</option>
+              </select>
+            </div>
+          </div>
+
         </div>
-        <button class="btn-close-modal" id="btn-close-archive">✕</button>
-      </div>
 
-      <div class="modal-body">
-        <p class="archive-desc">
-          Danh sách toàn bộ thời khoá biểu và giáo án của các năm học, kỳ học trước đây. Cô có thể bấm xem lại hoặc sao chép sang kỳ hiện tại để tái sử dụng giáo án.
-        </p>
-
-        <div class="archive-list" id="archive-list-container">
-          <!-- Injected by archive.js -->
-          <div class="loading-state">Đang tải kho lưu trữ...</div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="btn-cancel-settings">Hủy</button>
+          <button type="submit" class="btn-primary" id="btn-save-settings">💾 Lưu Cấu Hình</button>
         </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn-secondary" id="btn-close-archive-footer">Đóng</button>
-      </div>
+      </form>
     </div>
   </div>
 
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toast-container"></div>
 
-  <!-- Google Identity Services for Drive OAuth -->
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <!-- Scripts: Modular & Easy to customize in Google AI Studio -->
-  <script type="module" src="/js/app.js?v=2.0"></script>
-
+  <!-- Main JavaScript App Entry Point -->
+  <script type="module" src="/js/app.js?v=2.4"></script>
 </body>
 </html>

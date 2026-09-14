@@ -5,6 +5,7 @@
 
 import { AppState, showToast } from './app.js';
 import { loadTimetableData } from './tab2-timetable.js';
+import { triggerAutoSync } from './drive-sync.js';
 
 export function initArchive() {
   const openBtn = document.getElementById('btn-open-archive');
@@ -136,6 +137,7 @@ function renderArchiveList(archives) {
             showToast('Đã sao chép thành công giáo án và lịch sang kỳ mới!', 'success');
             loadTimetableData(AppState.settings.current_year, AppState.settings.current_semester);
             document.getElementById('archive-modal').classList.add('hidden');
+            triggerAutoSync();
           } else {
             showToast('Lỗi khi sao chép lịch', 'error');
           }

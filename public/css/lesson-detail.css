@@ -1,0 +1,608 @@
+/**
+ * LESSON DETAIL & SINGLE DAY SPLIT VIEW
+ * Chế độ xem 30% lịch ngày + 70% soạn bài & gán Google Drive
+ */
+
+/* ==================== 30% LEFT: SINGLE DAY TIMETABLE ==================== */
+.single-day-sidebar {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.day-sidebar-header {
+  padding: 14px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-back-grid {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: #ffffff;
+  border: 1px solid var(--primary-border);
+  padding: 5px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  box-shadow: var(--shadow-2xs);
+}
+
+.btn-back-grid:hover {
+  background: var(--primary-surface);
+}
+
+.day-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.day-big-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.day-big-date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Quick day switcher mini chips */
+.day-chips-bar {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.day-mini-chip {
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.day-mini-chip:hover {
+  background: #f1f5f9;
+}
+
+.day-mini-chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+
+/* Day Periods List */
+.day-periods-scroll {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: calc(100vh - 240px);
+  overflow-y: auto;
+}
+
+.day-period-item {
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.day-period-item:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.day-period-item.is-active {
+  background: var(--primary-surface);
+  border: 1.5px solid var(--primary);
+  box-shadow: 0 0 0 2px rgba(27, 74, 47, 0.1);
+}
+
+.item-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item-period-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.item-class-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.item-class-empty {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  font-weight: normal;
+}
+
+/* Session divider in day list */
+.session-tag-divider {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  background: #f1f5f9;
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+}
+
+/* ==================== 70% RIGHT: LESSON DETAIL PANEL ==================== */
+.lesson-detail-panel {
+  background: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-header {
+  padding: 16px 20px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.panel-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.panel-period-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.panel-heading {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.panel-meta-line {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-panel-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  border: 1px solid var(--primary-border);
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  box-shadow: var(--shadow-2xs);
+}
+
+.btn-panel-ai:hover {
+  background: var(--primary-surface);
+}
+
+.btn-panel-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  border: 1px solid var(--primary-dark);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-panel-save:hover {
+  background: var(--primary-hover);
+}
+
+/* Panel Form Body */
+.panel-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-group-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-label-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.form-input-box {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  color: var(--text-body);
+  transition: all var(--trans-fast);
+}
+
+.form-input-box:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(27, 74, 47, 0.12);
+}
+
+textarea.form-input-box {
+  min-height: 80px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* ==================== GOOGLE DRIVE SEARCH & ATTACH SECTION ==================== */
+.drive-attach-section {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  background: #fafdfa;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.drive-attach-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.drive-attach-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.drive-search-wrapper {
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+
+.drive-search-input {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+}
+
+/* ==================== GOOGLE DRIVE SEARCH & ATTACH SECTION ==================== */
+.drive-attach-section {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  background: #fafdfa;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.drive-attach-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.drive-attach-title {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.drive-search-wrapper {
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+
+.drive-search-input {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  color: var(--text-body);
+  transition: all var(--trans-fast);
+}
+
+.drive-search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(27, 74, 47, 0.12);
+}
+
+/* Drive Search Results Dropdown */
+.drive-search-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  max-height: 280px;
+  overflow-y: auto;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.drive-search-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #ffffff;
+  transition: background var(--trans-fast);
+  gap: 12px;
+}
+
+.drive-search-item:last-child {
+  border-bottom: none;
+}
+
+.drive-search-item:hover {
+  background: #f0fdf4;
+}
+
+.file-info-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.file-type-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-name-text {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+.file-time-text {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+.btn-attach-action {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-attach-action:hover {
+  background: #047857;
+  color: #ffffff;
+  border-color: #047857;
+  box-shadow: var(--shadow-2xs);
+}
+
+/* Attached Documents Chips List */
+.attached-docs-grid,
+.attached-files-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.empty-files-text {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-style: italic;
+  padding: 4px 0;
+}
+
+.attached-file-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+  box-shadow: var(--shadow-2xs);
+  transition: all var(--trans-fast);
+  gap: 12px;
+}
+
+.attached-file-chip:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--shadow-xs);
+}
+
+.chip-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  flex: 1;
+}
+
+.chip-name {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #1e293b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.chip-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-open-drive {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.btn-open-drive:hover {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #86efac;
+}
+
+.btn-detach-drive {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
+  padding: 5px 9px;
+  border-radius: var(--radius-sm);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--trans-fast);
+}
+
+.btn-detach-drive:hover {
+  background: #e11d48;
+  color: #ffffff;
+  border-color: #e11d48;
+}
+
+/* ==================== PAST & TODAY IN SINGLE DAY SIDEBAR ==================== */
+.day-period-item.is-past {
+  opacity: 0.52;
+  background: #f8faf8;
+  filter: grayscale(0.45);
+}
+
+.day-period-item.is-past:hover {
+  opacity: 1;
+  filter: none;
+}
+
+.day-period-item.is-today {
+  border-left: 3px solid var(--primary);
+  background: #fbfdfa;
+}
+

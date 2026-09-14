@@ -5,6 +5,7 @@
 
 import { AppState, showToast } from './app.js';
 import { loadPeriodDriveFiles } from './drive-search.js';
+import { triggerAutoSync } from './drive-sync.js';
 
 const DAYS = [
   { num: 2, label: 'Thứ Hai' },
@@ -69,6 +70,12 @@ export function initTimetable() {
   if (saveAllBtn) {
     saveAllBtn.addEventListener('click', async () => {
       if (!AppState.currentTimetable) return;
+      const y = AppState.settings.current_year;
+      const s = AppState.settings.current_semester;
+      const w = AppState.currentWeek || 1;
+      const storageKey = `troly_gv_tt_${y}_${s}_week_${w}`;
+      localStorage.setItem(storageKey, JSON.stringify(AppState.currentTimetable));
+
       try {
         const resp = await fetch('/api/timetable/save', {
           method: 'POST',
@@ -76,10 +83,15 @@ export function initTimetable() {
           body: JSON.stringify(AppState.currentTimetable)
         });
         if (resp.ok) {
-          showToast('Đã lưu toàn bộ thời khoá biểu thành công', 'success');
+          showToast(`Đã lưu thời khoá biểu Tuần ${w} thành công`, 'success');
+          triggerAutoSync();
+        } else {
+          showToast('Đã lưu thời khoá biểu trên trình duyệt', 'info');
+          triggerAutoSync();
         }
       } catch (e) {
-        showToast('Lỗi khi lưu thời khoá biểu', 'error');
+        showToast('Đã lưu thời khoá biểu cục bộ (offline)', 'info');
+        triggerAutoSync();
       }
     });
   }
@@ -206,10 +218,14 @@ export async function refreshWeeksList() {
       const weeks = data.weeks || [1];
       if (weekSelect) {
         weekSelect.innerHTML = '';
+        const startDate = AppState.settings.start_date || '2026-09-07';
         weeks.forEach(w => {
           const opt = document.createElement('option');
           opt.value = w;
-          opt.textContent = `Tuần ${w}`;
+          const mon = getDayDateInfo(2, w, startDate);
+          const sat = getDayDateInfo(7, w, startDate);
+          const dateLabel = (mon.formatted && sat.formatted) ? ` (${mon.formatted} - ${sat.formatted})` : '';
+          opt.textContent = `Tuần ${w}${dateLabel}`;
           weekSelect.appendChild(opt);
         });
       }
@@ -406,19 +422,33 @@ export async function loadTimetableData(year, semester, week) {
   const y = year || AppState.settings.current_year;
   const s = semester || AppState.settings.current_semester;
   const w = week || AppState.currentWeek || 1;
+  const storageKey = `troly_gv_tt_${y}_${s}_week_${w}`;
 
+  // 1. Local-First: Tải ngay lập tức từ bộ nhớ trình duyệt (0ms) giúp chuyển tuần cực nhanh và giữ nguyên bài cũ
+  try {
+    const cached = localStorage.getItem(storageKey);
+    if (cached) {
+      const data = JSON.parse(cached);
+      AppState.currentTimetable = data;
+      AppState.currentWeek = data.metadata?.week || w;
+      renderFullGrid(data);
+      updateTimetableStats(data);
+    }
+  } catch (e) {}
+
+  // 2. Đồng bộ ngầm với Backend
   try {
     const resp = await fetch(`/api/timetable?year=${encodeURIComponent(y)}&semester=${encodeURIComponent(s)}&week=${w}`);
     if (resp.ok) {
       const data = await resp.json();
       AppState.currentTimetable = data;
       AppState.currentWeek = data.metadata?.week || w;
+      localStorage.setItem(storageKey, JSON.stringify(data));
       renderFullGrid(data);
       updateTimetableStats(data);
     }
   } catch (err) {
-    console.error('Lỗi khi tải dữ liệu TKB:', err);
-    showToast('Không thể tải thời khoá biểu', 'error');
+    console.warn('Đang hiển thị thời khoá biểu tuần từ bộ nhớ cục bộ:', err);
   }
 }
 
@@ -858,9 +888,17 @@ async function saveCurrentLessonDetail() {
       document.getElementById('panel-class-title').textContent = cls ? `Lớp ${cls} - Môn ${targetSlot.subject || AppState.settings.subject}` : 'Tiết trống';
       // Render lại sidebar
       renderCompactDaySidebar(targetSlot.dayOfWeek, targetSlot.id);
+
+      // Lưu lại vào cache cục bộ của tuần này và đồng bộ Google Drive
+      const storageKey = `troly_gv_tt_${y}_${s}_week_${w}`;
+      localStorage.setItem(storageKey, JSON.stringify(AppState.currentTimetable));
+      triggerAutoSync();
     }
   } catch (e) {
-    showToast('Lỗi khi lưu bài học', 'error');
+    showToast('Đã lưu bài học cục bộ (offline)', 'info');
+    const storageKey = `troly_gv_tt_${y}_${s}_week_${w}`;
+    localStorage.setItem(storageKey, JSON.stringify(AppState.currentTimetable));
+    triggerAutoSync();
   }
 }
 

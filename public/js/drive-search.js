@@ -4,6 +4,7 @@
  */
 
 import { AppState, showToast } from './app.js';
+import { ensureValidDriveToken, updateSyncUIStatus, triggerAutoSync } from './drive-sync.js';
 
 let searchTimeout = null;
 
@@ -56,7 +57,7 @@ export function initDriveSearch() {
 
   // Click outside to hide results dropdown
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.drive-search-box')) {
+    if (!e.target.closest('.drive-search-wrapper') && !e.target.closest('.drive-search-box')) {
       resultsContainer.classList.add('hidden');
     }
   });
@@ -71,45 +72,16 @@ export function initDriveSearch() {
 }
 
 /**
- * Xử lý đăng nhập Google Drive qua Google Identity Services (GIS)
+ * Xử lý đăng nhập Google Drive qua Google Identity Services (GIS) với cơ chế duy trì cả ngày
  */
-function handleGoogleDriveLogin() {
-  const clientId = (AppState.settings && AppState.settings.google_drive_client_id) || '';
-  if (!clientId.trim()) {
-    showToast('Cô vui lòng nhập Google Client ID trong mục ⚙️ Cài đặt để kết nối Drive nhé!', 'warning');
-    const modal = document.getElementById('settings-modal');
-    if (modal) modal.classList.remove('hidden');
-    return;
-  }
-
-  if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) {
-    showToast('Đang tải thư viện xác thực Google... Vui lòng thử lại sau vài giây nhé!', 'info');
-    return;
-  }
-
-  try {
-    const tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: clientId.trim(),
-      scope: 'https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.readonly',
-      callback: (tokenResponse) => {
-        if (tokenResponse && tokenResponse.access_token) {
-          AppState.googleAccessToken = tokenResponse.access_token;
-          sessionStorage.setItem('google_drive_token', tokenResponse.access_token);
-          showToast('Đã kết nối tài khoản Google Drive thành công!', 'success');
-          updateDriveConnectionUI();
-        } else if (tokenResponse && tokenResponse.error) {
-          showToast(`Lỗi kết nối Google: ${tokenResponse.error}`, 'error');
-        }
-      }
-    });
-    tokenClient.requestAccessToken({ prompt: 'consent' });
-  } catch (err) {
-    showToast(`Không thể mở xác thực Google: ${err.message}`, 'error');
-  }
+async function handleGoogleDriveLogin() {
+  const token = await ensureValidDriveToken(true);
+  updateDriveConnectionUI();
+  updateSyncUIStatus();
 }
 
-function updateDriveConnectionUI() {
-  const token = AppState.googleAccessToken || sessionStorage.getItem('google_drive_token');
+export function updateDriveConnectionUI() {
+  const token = AppState.googleAccessToken;
   const btn = document.getElementById('btn-connect-drive');
   const textSpan = document.getElementById('drive-connect-text');
 
@@ -118,7 +90,7 @@ function updateDriveConnectionUI() {
       btn.style.borderColor = '#10b981';
       btn.style.color = '#10b981';
       textSpan.textContent = '✅ Đã kết nối Drive';
-      btn.title = 'Đã kết nối tài khoản Google Drive. Bấm để kết nối lại';
+      btn.title = 'Đã kết nối tài khoản Google Drive và duy trì cả ngày. Bấm để kết nối lại.';
     } else {
       btn.style.borderColor = '';
       btn.style.color = '';
@@ -226,6 +198,7 @@ async function attachFileToCurrentPeriod(file) {
       if (targetSlot) {
         targetSlot.driveFiles = data.slot.driveFiles;
         renderAttachedFiles(targetSlot.driveFiles);
+        triggerAutoSync();
       }
     }
   } catch (err) {
@@ -268,6 +241,7 @@ async function uploadDirectFile(file) {
         targetSlot.driveFiles = targetSlot.driveFiles || [];
         targetSlot.driveFiles.push(result.file);
         renderAttachedFiles(targetSlot.driveFiles);
+        triggerAutoSync();
       }
     }
   } catch (err) {
@@ -346,6 +320,7 @@ async function detachFileFromPeriod(fileId) {
       if (targetSlot && targetSlot.driveFiles) {
         targetSlot.driveFiles = targetSlot.driveFiles.filter(f => f.id !== fileId);
         renderAttachedFiles(targetSlot.driveFiles);
+        triggerAutoSync();
       }
     }
   } catch (err) {

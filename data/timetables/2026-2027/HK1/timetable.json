@@ -1,15 +1,15 @@
 {
   "metadata": {
-    "teacherName": "Giáo viên",
+    "teacherName": "NCường Toán",
     "academicYear": "2026-2027",
     "semester": "HK1",
     "week": 1,
-    "appliedDate": "2026-09-07",
+    "appliedDate": "2026-09-15",
     "startDate": "2026-09-07",
-    "totalPeriods": 0,
+    "totalPeriods": 20,
     "notes": "",
-    "createdAt": "2026-09-07T01:10:35.940356",
-    "updatedAt": "2026-09-07T01:10:35.940356"
+    "createdAt": "2026-09-15T03:11:17.680674",
+    "updatedAt": "2026-09-15T04:00:33.477465"
   },
   "schedule": [
     {
@@ -26,7 +26,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p2",
@@ -42,7 +43,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p3",
@@ -58,7 +60,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p4",
@@ -74,7 +77,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p5",
@@ -82,15 +86,16 @@
       "session": "morning",
       "period": 5,
       "timeRange": "10:30 - 11:15",
-      "className": "",
-      "subject": "",
+      "className": "10A12",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p6",
@@ -98,15 +103,16 @@
       "session": "afternoon",
       "period": 6,
       "timeRange": "13:00 - 13:45",
-      "className": "",
-      "subject": "",
+      "className": "10A12",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p7",
@@ -114,15 +120,16 @@
       "session": "afternoon",
       "period": 7,
       "timeRange": "13:50 - 14:35",
-      "className": "",
-      "subject": "",
+      "className": "10A12",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p8",
@@ -130,15 +137,16 @@
       "session": "afternoon",
       "period": 8,
       "timeRange": "14:45 - 15:30",
-      "className": "",
-      "subject": "",
+      "className": "10A8",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p9",
@@ -154,7 +162,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d2_p10",
@@ -170,7 +179,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p1",
@@ -178,15 +188,16 @@
       "session": "morning",
       "period": 1,
       "timeRange": "07:00 - 07:45",
-      "className": "",
-      "subject": "",
+      "className": "10A1",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p2",
@@ -202,7 +213,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p3",
@@ -218,7 +230,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p4",
@@ -226,15 +239,16 @@
       "session": "morning",
       "period": 4,
       "timeRange": "09:40 - 10:25",
-      "className": "",
-      "subject": "",
+      "className": "10A7",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p5",
@@ -242,15 +256,16 @@
       "session": "morning",
       "period": 5,
       "timeRange": "10:30 - 11:15",
-      "className": "",
-      "subject": "",
+      "className": "10A7",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p6",
@@ -266,7 +281,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p7",
@@ -282,7 +298,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p8",
@@ -298,7 +315,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p9",
@@ -314,7 +332,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d3_p10",
@@ -330,7 +349,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p1",
@@ -346,7 +366,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p2",
@@ -362,7 +383,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p3",
@@ -378,7 +400,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p4",
@@ -394,7 +417,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p5",
@@ -410,7 +434,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p6",
@@ -426,7 +451,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p7",
@@ -434,15 +460,16 @@
       "session": "afternoon",
       "period": 7,
       "timeRange": "13:50 - 14:35",
-      "className": "",
-      "subject": "",
+      "className": "10A5",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p8",
@@ -450,15 +477,16 @@
       "session": "afternoon",
       "period": 8,
       "timeRange": "14:45 - 15:30",
-      "className": "",
-      "subject": "",
+      "className": "10A8",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p9",
@@ -474,7 +502,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d4_p10",
@@ -490,7 +519,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p1",
@@ -498,15 +528,16 @@
       "session": "morning",
       "period": 1,
       "timeRange": "07:00 - 07:45",
-      "className": "",
-      "subject": "",
+      "className": "10A12",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p2",
@@ -514,15 +545,16 @@
       "session": "morning",
       "period": 2,
       "timeRange": "07:50 - 08:35",
-      "className": "",
-      "subject": "",
+      "className": "10A2",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p3",
@@ -530,15 +562,16 @@
       "session": "morning",
       "period": 3,
       "timeRange": "08:45 - 09:30",
-      "className": "",
-      "subject": "",
+      "className": "10A5",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p4",
@@ -546,15 +579,16 @@
       "session": "morning",
       "period": 4,
       "timeRange": "09:40 - 10:25",
-      "className": "",
-      "subject": "",
+      "className": "10A5",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p5",
@@ -562,15 +596,16 @@
       "session": "morning",
       "period": 5,
       "timeRange": "10:30 - 11:15",
-      "className": "",
-      "subject": "",
+      "className": "10A5",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p6",
@@ -586,7 +621,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p7",
@@ -602,7 +638,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p8",
@@ -618,7 +655,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p9",
@@ -634,7 +672,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d5_p10",
@@ -650,7 +689,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p1",
@@ -666,7 +706,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p2",
@@ -682,7 +723,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p3",
@@ -690,15 +732,16 @@
       "session": "morning",
       "period": 3,
       "timeRange": "08:45 - 09:30",
-      "className": "",
-      "subject": "",
+      "className": "10A8",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p4",
@@ -706,15 +749,16 @@
       "session": "morning",
       "period": 4,
       "timeRange": "09:40 - 10:25",
-      "className": "",
-      "subject": "",
+      "className": "10A12",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p5",
@@ -722,15 +766,16 @@
       "session": "morning",
       "period": 5,
       "timeRange": "10:30 - 11:15",
-      "className": "",
-      "subject": "",
+      "className": "10A1",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p6",
@@ -738,15 +783,16 @@
       "session": "afternoon",
       "period": 6,
       "timeRange": "13:00 - 13:45",
-      "className": "",
-      "subject": "",
+      "className": "10A1",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p7",
@@ -754,15 +800,16 @@
       "session": "afternoon",
       "period": 7,
       "timeRange": "13:50 - 14:35",
-      "className": "",
-      "subject": "",
+      "className": "10A1",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p8",
@@ -770,15 +817,16 @@
       "session": "afternoon",
       "period": 8,
       "timeRange": "14:45 - 15:30",
-      "className": "",
-      "subject": "",
+      "className": "10A1",
+      "subject": "Toán",
       "room": "",
       "lessonTitle": "",
       "lessonObjective": "",
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p9",
@@ -794,7 +842,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d6_p10",
@@ -810,7 +859,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p1",
@@ -826,7 +876,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p2",
@@ -842,7 +893,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p3",
@@ -858,7 +910,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p4",
@@ -874,7 +927,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p5",
@@ -890,7 +944,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p6",
@@ -906,7 +961,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p7",
@@ -922,7 +978,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p8",
@@ -938,7 +995,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p9",
@@ -954,7 +1012,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     },
     {
       "id": "d7_p10",
@@ -970,7 +1029,8 @@
       "notes": "",
       "driveFolderId": null,
       "driveFiles": [],
-      "analyzedFileIds": []
+      "analyzedFileIds": [],
+      "updatedAt": null
     }
   ]
 }

@@ -1,0 +1,97 @@
+/**
+ * DESIGN TOKENS - EDUPAL / GIAOAN CO LINH
+ * Lấy cảm hứng từ hệ màu Forest Green & Emerald của UINew
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand Green Palette */
+  --primary: #1b4a2f;
+  --primary-hover: #143d25;
+  --primary-dark: #12331f;
+  --primary-surface: #edf7ec;
+  --primary-border: #d2edd0;
+  --primary-accent: #d2f3b3;
+  --primary-accent-hover: #c4ec9e;
+  --primary-accent-text: #1e4e2b;
+
+  /* Neutrals & Backgrounds */
+  --bg-app: #fbfdfa;
+  --bg-card: #ffffff;
+  --bg-subtle: #f8fbf8;
+  --bg-hover: #f1f5f1;
+  --border-color: #e2efe0;
+  --border-light: #edf2ec;
+
+  /* Typography Colors */
+  --text-main: #183f2a;
+  --text-body: #334155;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+
+  /* Status Colors */
+  --status-active-bg: #1b4a2f;
+  --status-active-text: #ffffff;
+  --status-passed-bg: #f8faf8;
+  --status-passed-border: #e4eae3;
+  --status-passed-text: #64748b;
+  --status-exam-bg: #fff2e8;
+  --status-exam-border: #ffbb96;
+  --status-exam-text: #d4380d;
+
+  /* Shadows */
+  --shadow-2xs: 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  /* Aliases for cross-module compatibility */
+  --border: var(--border-color);
+  --text-dark: var(--text-main);
+  --primary-light: var(--primary-surface);
+}
+
+.hidden {
+  display: none !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-app);
+  color: var(--text-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

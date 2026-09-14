@@ -4,9 +4,6 @@ import os
 from typing import Dict, Any, Optional, List, Tuple
 from pathlib import Path
 
-import google.generativeai as genai
-from PIL import Image
-
 from app.services.storage_service import StorageService
 from app.models.schemas import Timetable, PeriodSlot, TimetableMetadata
 
@@ -19,8 +16,8 @@ QUY TẮC PHÂN TÍCH THỜI KHOÁ BIỂU:
    - Tên giáo viên trong bảng thường được viết tắt kèm môn dạy (Ví dụ: 'Nam T', 'Linh V', 'Hương Văn',...). Hãy luôn đối chiếu với tên và môn dạy của giáo viên hiện tại.
    - Lưới thời gian trong tuần: Thứ 2 (dayOfWeek: 2) đến Thứ 7 (dayOfWeek: 7).
    - Quy ước tiết:
-     + Buổi Sáng: Tiết 1, 2, 3, 4, 5 -> session: "morning", period tương ứng 1, 2, 3, 4, 5.
-     + Buổi Chiều: Tiết 1, 2, 3, 4, 5 Chiều -> session: "afternoon", period tương ứng 6, 7, 8, 9, 10 (Tiết 1 Chiều = 6, Tiết 2 Chiều = 7, Tiết 3 Chiều = 8,...).
+      + Buổi Sáng: Tiết 1, 2, 3, 4, 5 -> session: "morning", period tương ứng 1, 2, 3, 4, 5.
+      + Buổi Chiều: Chỉ có 3 tiết (Tiết 1, 2, 3 Chiều, bắt đầu học lúc 14:00) -> session: "afternoon", period tương ứng 6 (Tiết 1 Chiều: 14:00 - 14:45), 7 (Tiết 2 Chiều: 14:55 - 15:40), 8 (Tiết 3 Chiều: 15:50 - 16:35). Tuyệt đối không có tiết 9 và 10.
 
 2. Quy trình xử lý:
    - NẾU ĐÃ CÓ FILE/NỘI DUNG VÀ THÔNG TIN GIÁO VIÊN: Hãy chủ động tìm và trích xuất TẤT CẢ các tiết dạy trong tuần của giáo viên đó, tạo thành danh sách tiết hoàn chỉnh trong `timetable.schedule`.
@@ -168,6 +165,7 @@ class GeminiService:
         # 4. File Ảnh (.jpg, .jpeg, .png, .webp, .bmp)
         elif ext in [".jpg", ".jpeg", ".png", ".webp", ".bmp"]:
             try:
+                from PIL import Image
                 img = Image.open(file_path)
                 return img, None
             except Exception as e:
@@ -222,6 +220,7 @@ class GeminiService:
         api_key = custom_api_key or settings.get("gemini_api_key") or os.environ.get("GEMINI_API_KEY", "")
         if not api_key:
             return None
+        import google.generativeai as genai
         genai.configure(api_key=api_key)
         target_model = model_name or settings.get("gemini_model") or "gemini-3.1-flash-lite"
         if target_model == "auto-rotate":
